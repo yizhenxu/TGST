@@ -1,0 +1,8 @@
+Package: TVLT
+Title: What the Package Does (one line, title case)
+Version: 0.0.0.9000
+Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
+Description: Targeted viral load testing. Paper "Optimal Allocation of Gold Standard Testing under Constrained Availability: Application to Assessment of HIV Treatment Failure" (Liu, Hogan, Wang, Zhang, Kantor 2014).
+Depends: R (>= 3.2.0)
+License: What license is it under?
+LazyData: true
