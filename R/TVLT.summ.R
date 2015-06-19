@@ -35,7 +35,7 @@ TVLT.summ = function(Z,S){
   plot(dens0,ylim = yrange, col="blue",
        xlab="Risk Score S", ylab="Population Distributions",main="Risk Score Distribution")
   lines(dens1,col="red")
-  legend(s.max/2,yrange[2], c("Z=0","Z=1"),
+  legend((s.max+s.min)/2,yrange[2], c("Z=0","Z=1"),
          lty=c(1,1),  lwd=c(2.5,2.5),col=c("blue","red")) 
   #output
   z = list(percF=percF,SummaryS0=summ.S0,SummaryS1=summ.S1)
