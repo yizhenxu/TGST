@@ -1,5 +1,5 @@
-\name{CD4Count}
-\alias{CD4Count}
+\name{MiriamData}
+\alias{MiriamData}
 \docType{data}
 \title{
 Viral load, CD4 count and CD4 percent of 645 patients.
@@ -7,7 +7,7 @@ Viral load, CD4 count and CD4 percent of 645 patients.
 \description{
 A data set containing viral load count, CD4 count, CD4 percent, CD4 count 6 months ago and CD4 percent 6 months ago.
 }
-\usage{data("CD4Count")}
+\usage{data("MiriamData")}
 \format{
   A data frame with 645 observations on the following 6 variables.
   \describe{
@@ -29,7 +29,7 @@ A data set containing viral load count, CD4 count, CD4 percent, CD4 count 6 mont
 %%  ~~ possibly secondary sources and usages ~~
 }
 \examples{
-data(CD4Count)
-## maybe str(CD4Count) ; plot(CD4Count) ...
+data(MiriamData)
+## maybe str(MiriamData) ; plot(MiriamData) ...
 }
 \keyword{datasets}
