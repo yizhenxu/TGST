@@ -10,7 +10,7 @@
 #' @keywords Prevalence of disease (treatment failure), risk score summary, risk score distribution.
 #' @export
 #' @examples
-#' data = read.csv("data.csv", header = TRUE) 
+#' data = MiriamData
 #' Z = (data$PVL_Count_Now>1000) #True Status
 #' S = data$CD4_count_Now #Risk Score
 #' TVLT.summ(Z,S)
