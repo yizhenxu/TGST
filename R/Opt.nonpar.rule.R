@@ -19,7 +19,8 @@
 
 Opt.nonpar.rule <- function(Z,S,phi,lambda){
   rules <- Rules.set(Z,S,phi)
-  risk <- rules[,3]*lambda + rules[,4]*(1-lambda)
+  p <- mean(Z,na.rm=TRUE)
+  risk <- rules[,3]*p*lambda + rules[,4]*(1-p)*(1-lambda)
   index <- which.min(risk)
   opt.risk <- risk[index]
   opt.rule <- rules[index,1:2]
