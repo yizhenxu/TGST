@@ -33,7 +33,7 @@ Rules.set <- function(Z,S,phi){
   # empirical cdf of S, cum.F=c(0,....,1)
   cum.F <- 0
   for(i in 1:n.unique.S){
-    cum.F <- c(cum.F, mean(S<=S.srt[i]))
+    cum.F <- c(cum.F, mean(S<=S.srt[i],na.rm=TRUE))
   }
   # this can be also achieved by 
   # cdf.S=ecdf(S)

@@ -3,6 +3,8 @@
 export(Check.exp.tilt)
 export(CrossVal)
 export(Opt.nonpar.rule)
+export(ROC.nonpar)
+export(ROC.semipar)
 export(ROCAnalysis)
 export(Rules.set)
 export(Semi.par.rule)
