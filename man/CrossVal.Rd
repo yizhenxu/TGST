@@ -19,7 +19,8 @@ CrossVal(ART = NULL, S = NULL, phi = NULL, RiskF = NULL)
 Cross-validation results.
 }
 \description{
-This function allows you to compute summary statistics of results from K-fold cross-validation.
+This function allows you to compute summary statistics of
+results from K-fold cross-validation.
 }
 \examples{
 CrossVal(ART=NULL,S=NULL,phi=NULL,RiskF=NULL)

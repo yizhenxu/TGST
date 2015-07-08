@@ -1,6 +1,6 @@
 #' Semiparametric Rule
 #'
-#' This function gives you the optimal semiparametric tripartite rule and the related optimal TMR (total misclassification risk).  
+#' This function gives you the optimal semiparametric tripartite rule that minimizes TMR (total misclassification risk).  
 #' @param Z True disease status (No disease / treatment success coded as Z=0, diseased / treatment failure coded as Z=1). 
 #' @param S Risk score. 
 #' @param phi Percentage of patients taking viral load test. 
@@ -56,7 +56,7 @@ Semi.par.rule <- function(Z,S,phi){
     fnr.fpr <- c(mean((S<cutoff[1])*Z,na.rm=TRUE)/mean(Z,na.rm=TRUE),
                                 mean((S>cutoff[2])*(1-Z),na.rm=TRUE)/mean(1-Z,na.rm=TRUE))
     p <- mean(Z,na.rm=TRUE)
-    TMR <- 0.5*p*fnr.fpr[1]+0.5*(1-p)*fnr.fpr[2]
+    TMR <- p*fnr.fpr[1]+(1-p)*fnr.fpr[2]
     outpt <- c(cutoff,TMR)
     names(outpt) <- c("lower.cutoff", "upper.cutoff", "minTMR")
     return(outpt)

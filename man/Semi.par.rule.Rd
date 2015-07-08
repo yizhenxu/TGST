@@ -17,7 +17,7 @@ Semi.par.rule(Z, S, phi)
 Semiparametric rule and its associated TMR.
 }
 \description{
-This function gives you the optimal semiparametric tripartite rule and the related optimal TMR (total misclassification risk).
+This function gives you the optimal semiparametric tripartite rule that minimizes TMR (total misclassification risk).
 }
 \examples{
 data = MiriamData
