@@ -11,9 +11,9 @@
 #' @keywords Nonparametric, tripartite rules, FNR, FPR.
 #' @export
 #' @examples
-#' data = MiriamData
-#' Z = (data$PVL_Count_Now>1000) #True Status
-#' S = data$CD4_count_Now #Risk Score
+#' data = Simdata
+#' Z = d$Z # True Disease Status
+#' S = d$S # Risk Score
 #' phi = 0.1 #10% of patients taking viral load test
 #' Rules.set( Z, S, phi)
 

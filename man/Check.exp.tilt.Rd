@@ -19,9 +19,9 @@ This function provides graphical assessment to the suitability of the exponentia
 \deqn{g1(s)=exp(\tilde{\beta0}+\beta1*s)*g0(s)}
 }
 \examples{
-data = MiriamData
-Z = (data$PVL_Count_Now>1000) #True Status
-S = data$CD4_count_Now #Risk Score
+data = Simdata
+Z = d$Z # True Disease Status
+S = d$S # Risk Score
 Check.exp.tilt( Z, S)
 }
 \keyword{Semiparametric,}

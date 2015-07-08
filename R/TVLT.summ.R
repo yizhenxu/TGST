@@ -10,9 +10,9 @@
 #' @keywords Prevalence of disease (treatment failure), risk score summary, risk score distribution.
 #' @export
 #' @examples
-#' data = MiriamData
-#' Z = (data$PVL_Count_Now>1000) #True Status
-#' S = data$CD4_count_Now #Risk Score
+#' data = Simdata
+#' Z = d$Z # True Disease Status
+#' S = d$S # Risk Score
 #' TVLT.summ(Z,S)
 
 

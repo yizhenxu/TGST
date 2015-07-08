@@ -20,9 +20,9 @@ Distribution plot.
 This function allows you to compute the percentage of diseased (equivalent to treatment failure Z=1) and show distribution summary of risk score (S) by the true disease status (Z).
 }
 \examples{
-data = MiriamData
-Z = (data$PVL_Count_Now>1000) #True Status
-S = data$CD4_count_Now #Risk Score
+data = Simdata
+Z = d$Z # True Disease Status
+S = d$S # Risk Score
 TVLT.summ(Z,S)
 }
 \keyword{(treatment}

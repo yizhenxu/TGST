@@ -10,6 +10,9 @@
 #' @keywords Cross validation.
 #' @export
 #' @examples
+#' data = Simdata
+#' Z = d$Z # True Disease Status
+#' S = d$S # Risk Score
 #' CrossVal(ART=NULL,S=NULL,phi=NULL,RiskF=NULL)
 
 CrossVal <- function(ART=NULL,S=NULL,phi=NULL,RiskF=NULL){

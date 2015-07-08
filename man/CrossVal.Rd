@@ -23,6 +23,9 @@ This function allows you to compute summary statistics of
 results from K-fold cross-validation.
 }
 \examples{
+data = Simdata
+Z = d$Z # True Disease Status
+S = d$S # Risk Score
 CrossVal(ART=NULL,S=NULL,phi=NULL,RiskF=NULL)
 }
 \keyword{Cross}

@@ -22,9 +22,9 @@ Optimal semiparametric rule and its associated risk.
 This function gives you the optimal semiparametric tripartite rule and the related optimal risk under min-\eqn{\lambda} rules.
 }
 \examples{
-data = MiriamData
-Z = (data$PVL_Count_Now>1000) #True Status
-S = data$CD4_count_Now #Risk Score
+data = Simdata
+Z = d$Z # True Disease Status
+S = d$S # Risk Score
 phi = 0.1 #10\% of patients taking viral load test
 lambda = 0.5
 Opt.semipar.rule( Z, S, phi, lambda)

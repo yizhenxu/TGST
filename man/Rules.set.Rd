@@ -22,9 +22,9 @@ This function gives you all possible cutoffs \eqn{[l,u]} for tripartite rules, b
 \deqn{P(S in [l,u]) \le \phi}
 }
 \examples{
-data = MiriamData
-Z = (data$PVL_Count_Now>1000) #True Status
-S = data$CD4_count_Now #Risk Score
+data = Simdata
+Z = d$Z # True Disease Status
+S = d$S # Risk Score
 phi = 0.1 #10\% of patients taking viral load test
 Rules.set( Z, S, phi)
 }
