@@ -2,10 +2,10 @@
 \alias{Simdata}
 \docType{data}
 \title{
-Simulated Miriam data 
+Simulated data 
 }
 \description{
-A simulated dataset containing true disease status, CD4 count, and risk score.
+A simulated dataset containing true disease status, CD4 count, and risk score. Simulation parameters are determined by fitting a dataset from  Miriam Immunology Clinic. See details.
 }
 \usage{data("Simulated Miriam Data")}
 \format{
