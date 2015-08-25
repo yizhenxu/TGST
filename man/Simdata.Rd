@@ -2,12 +2,12 @@
 \alias{Simdata}
 \docType{data}
 \title{
-Simulated data 
+Simulated data for package illustration
 }
 \description{
 A simulated dataset containing true disease status, CD4 count, and risk score. Simulation parameters are determined by fitting a dataset from  Miriam Immunology Clinic. See details.
 }
-\usage{data("Simulated Miriam Data")}
+\usage{data(Simdata)}
 \format{
   A data frame with 5000 simulated observations on the following 3 variables.
   \describe{

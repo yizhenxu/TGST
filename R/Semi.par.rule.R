@@ -1,4 +1,4 @@
-#' Semiparametric Rule
+#' Min TMR Semiparametric Rule
 #'
 #' This function gives you the optimal semiparametric tripartite rule that minimizes TMR (total misclassification risk).  
 #' @param Z True disease status (No disease / treatment success coded as Z=0, diseased / treatment failure coded as Z=1). 
@@ -9,7 +9,7 @@
 #' @keywords Semiparametric, optimal tripartite rules, optimal risk.
 #' @export
 #' @examples
-#' data = Simdata
+#' d = Simdata
 #' Z = d$Z # True Disease Status
 #' S = d$S # Risk Score
 #' phi = 0.1 #10% of patients taking viral load test

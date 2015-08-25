@@ -39,8 +39,10 @@ Check.exp.tilt <- function(Z,S){
   t <- exp(beta0star+temp$x*fit$coef[2]) #g1=t*g0 under exp tilt assumption
   #by g = p*g1+(1-p)*g0 = [p*t+(1-p)]*g0 = [p+(1-p)/t]*g1
   #plot the joint density (S,Z=1), (S,Z=0) under exponential tilt model assumption
-  lines(temp$x, temp$y/(p+(1-p)/t)*p, lty=2, col="blue") #(S,Z=1)
-  lines(temp$x, temp$y/(p*t+1-p)*(1-p), lty=2, col="green") #(S,Z=0)
+  g1 <- temp$y/(p+(1-p)/t)
+  g0 <- temp$y/(p*t+1-p)
+  lines(temp$x, g1*p, lty=2, col="blue") #(S,Z=1)
+  lines(temp$x, g0*(1-p), lty=2, col="green") #(S,Z=0)
   # setup for no margins on the legend
   par(mar=c(0, 0, 0, 0))
   # c(bottom, left, top, right)

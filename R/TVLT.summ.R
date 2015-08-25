@@ -10,7 +10,7 @@
 #' @keywords Prevalence of disease (treatment failure), risk score summary, risk score distribution.
 #' @export
 #' @examples
-#' data = Simdata
+#' d = Simdata
 #' Z = d$Z # True Disease Status
 #' S = d$S # Risk Score
 #' TVLT.summ(Z,S)

@@ -6,11 +6,12 @@
 #' @param phi Percentage of patients taking viral load test. 
 #' @return 
 #' AUC The area under the ROC curve.
-#' Misdiagnoses rate for viral failure (i.e., false negative rate, FNR) and otherwise (i.e., false positive rate, FPR). 
+#' FNR Misdiagnoses rate for viral failure (false negative rate).
+#' FPR Misdiagnoses rate for treatment failure (false positive rate).
 #' @keywords Nonparametric, ROC, AUC, FNR, FPR.
 #' @export
 #' @examples
-#' data = Simdata
+#' d = Simdata
 #' Z = d$Z # True Disease Status
 #' S = d$S # Risk Score
 #' phi = 0.1 #10% of patients taking viral load test
@@ -19,64 +20,64 @@
 #' a$FNR
 #' a$FPR
 
-ROC.semipar <- function(Z,S,phi,plot=TRUE){
-  #consider only complete cases
-  data <- cbind(Z,S)
-  Z <- data[complete.cases(data),1]
-  S <- data[complete.cases(data),2]
-  p <- mean(Z,na.rm=TRUE)
-  n = length(Z)
-  rules <- Rules.set(Z,S,phi)
-
+semipar.fnr.fpr <- function(Z,S,l,u){
+  if(length(l)!=length(u))   #l is lower cutoff, u is upper cutoff
+    cat("***** Warning: Wrong rules set. \n")
+  p <- mean(Z)
   temp <- density(S) #marginal density (S)
   fit <- glm(Z~ S, family=binomial)
   beta0star <- fit$coef[1]-log(p/(1-p))
   t <- exp(beta0star+temp$x*fit$coef[2]) #g1=t*g0 under exp tilt assumption
   g1 <- temp$y/(p+(1-p)/t)
   g0 <- temp$y/(p*t+1-p)
-
-  l <- length(temp$x)
-  dif <- temp$x[2:l]-temp$x[1:(l-1)]
+  x <- temp$x
   
-cal.fnr <- function(dens,a){  
-  diff <- a-temp$x
-  diff1 <- diff[diff<=0][1] 
-  indx <- which(diff==diff1)#return index of nearest right endpoint
-  area <- sum(dens[1:(indx-2)]*dif[1:(indx-2)])+dens[indx-1]*(a-temp$x[indx-1])
-  return(area)
-} 
-
+  len <- length(x)
+  dif <- x[2:len]-x[1:(len-1)]
+  
+  cal.fnr <- function(dens,a){  
+    if( a>max(x) ){
+      area <- 1
+    } else if( a<min(x) ){
+      area <- 0
+    } else {
+      diff <- a-x
+      diff1 <- diff[diff<=0][1] 
+      indx <- which(diff==diff1)#return index of nearest right endpoint
+      area <- sum(dens[1:(indx-2)]*dif[1:(indx-2)])+dens[indx-1]*(a-x[indx-1])
+    }
+    return(area)
+  } 
+  
   fnr.fpr <- NULL
-  K <- dim(rules)[1]
+  K <- length(l)
   for( i in 1:K){
-    l <- rules[i,1]
-    u <- rules[i,2]
-    fnr <- cal.fnr(g1,l)
-    fpr <- 1-cal.fnr(g0,u)
+    fnr <- cal.fnr(g1,l[i])
+    fpr <- 1-cal.fnr(g0,u[i])
     fnr.fpr <- rbind(fnr.fpr,c(fnr,fpr))        
   }
-
   
-  ## AUC
-  #Write the kth rule in Rule.set as (i_k,j_k), let j_0=0
-  #Hphi(u)=argmin_w {G(u)-G(w)<=phi}
-  #For Sj in (j_{k-1},j_k], Hphi(Sj)=i_k
-  Hphi <- function(Sj,bounds=rules[,1:2]){
-    diff <- Sj-bounds[,2]
-    diff1 <- diff[diff<=0][1] #Sj-j_k, where Sj in (j_{k-1},j_k]
-    indx <- which(diff==diff1)
-    return(bounds[indx,1])
-  }
-  #calculate AUC from eqn (10) pg1177
-  auc <- 0
-  for(j in 1:n){
-    auc <- auc+sum(Z*(1-Z[j])*((S>Hphi(S[j]))+(S==Hphi(S[j]))/2))
-  }
-  auc <- auc/(n^2*p*(1-p))
+  return(fnr.fpr)
+
+}
+
+
+
+ROC.semipar <- function(Z,S,phi,plot=TRUE){
+  #consider only complete cases
+  data <- cbind(Z,S)
+  Z <- data[complete.cases(data),1]
+  S <- data[complete.cases(data),2]
+  
+  rules <- nonpar.rules(Z,S,phi)
+
+  fnr.fpr <- semipar.fnr.fpr(Z,S,rules[,1],rules[,2])
+  
+  auc <- cal.AUC(Z,S,rules[,1],rules[,2])
 
   if(plot==TRUE){  
     #ROC curve
-    plot(fnr.fpr[,1],1-fnr.fpr[,2],type="l",xlab="FNR",ylab="TPR",main="ROC Curve")
+    plot(fnr.fpr[,2],1-fnr.fpr[,1],type="l",xlab="FPR",ylab="TPR",main="ROC Curve")
     legend('bottomright',paste("AUC=",round(auc,3),sep=" "),bty ="n",cex=0.8)
   }
   outpt = list(AUC=auc, FNR=fnr.fpr[,1], FPR=fnr.fpr[,2])

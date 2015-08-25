@@ -22,7 +22,7 @@ Optimal nonparametric rule and its associated risk.
 This function gives you the optimal nonparametric tripartite rule and the related optimal risk under min-\eqn{\lambda} rules.
 }
 \examples{
-data = Simdata
+d = Simdata
 Z = d$Z # True Disease Status
 S = d$S # Risk Score
 phi = 0.1 #10\% of patients taking viral load test

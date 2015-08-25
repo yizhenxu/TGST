@@ -33,8 +33,7 @@ CV.TVLT <- function(Z, S, phi, K = 10, method = "nonpar", lambda){
     fld.flg <- sample(c(rep(1:K,n.sub),1:r))
   }
   
-  fpr <- rep(NA,K)
-  fnr <- rep(NA,K)
+  fnr.fpr <- matrix(NA,ncol=2,nrow=K)
   risk <- rep(NA,K)
   
   for(i in 1:K){
@@ -46,40 +45,24 @@ CV.TVLT <- function(Z, S, phi, K = 10, method = "nonpar", lambda){
     if(method == "nonpar"){
     
       opt.rule <- Opt.nonpar.rule(train.dat[,1],train.dat[,2],phi,lambda)
-      fnr[i] <- mean((val.dat[,2]<opt.rule[1])*val.dat[,1])/mean(val.dat[,1])
-      fpr[i] <- mean((val.dat[,2]>opt.rule[2])*(1-val.dat[,1]))/mean(1-val.dat[,1])
-      risk[i] <- fnr[i]*p*lambda + fpr[i]*(1-p)*(1-lambda)
-      
+      fnr.fpr[i,] <- nonpar.fnr.fpr(val.dat[,1],val.dat[,2],opt.rule[1],opt.rule[2])
+
     } else if (method == "semipar"){
       
       opt.rule <- Opt.semipar.rule(train.dat[,1],train.dat[,2],phi,lambda)
-  
-      temp <- density(val.dat[,2]) #marginal density (S)
-      fit <- glm(val.dat[,1]~ val.dat[,2], family=binomial)
-      beta0star <- fit$coef[1]-log(p/(1-p))
-      t <- exp(beta0star+temp$x*fit$coef[2]) #g1=t*g0 under exp tilt assumption
-      g1 <- temp$y/(p+(1-p)/t)
-      g0 <- temp$y/(p*t+1-p)
-      l <- length(temp$x)
-      dif <- temp$x[2:l]-temp$x[1:(l-1)]      
-      
-      cal.fnr <- function(dens,a){  
-        diff <- a-temp$x
-        diff1 <- diff[diff<=0][1] 
-        indx <- which(diff==diff1)#return index of nearest right endpoint
-        area <- sum(dens[1:(indx-2)]*dif[1:(indx-2)])+dens[indx-1]*(a-temp$x[indx-1])
-        return(area)
-      } 
-      
-      fnr[i] <- cal.fnr(g1,opt.rule[1])
-      fpr[i] <- 1-cal.fnr(g0,opt.rule[2])
-      risk[i] <- fnr[i]*p*lambda + fpr[i]*(1-p)*(1-lambda)
-      
+      fnr.fpr[i,] <- semipar.fnr.fpr(val.dat[,1],val.dat[,2],opt.rule[1],opt.rule[2])
+
     } else {
       cat("Wrong method input!\n")
     }
+    
+    risk[i] <- fnr.fpr[i,1]*p*lambda + fnr.fpr[i,2]*(1-p)*(1-lambda)
+    
   }
   
-  result <- apply(cbind(fnr,fpr,risk),2,mean)
+  result <- apply(cbind(fnr.fpr,risk),2,mean)
+  names(result) <- c("avr.FNR","avr.FPR","avr.risk")
+
   return(result)
+
 }

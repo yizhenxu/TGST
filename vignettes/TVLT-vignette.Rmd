@@ -1,0 +1,468 @@
+---
+title: "Package 'TVLT'"
+author: "Yizhen Xu, Tao Liu, Joseph Hogan"
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+    toc_depth: 3
+vignette: >
+  %\VignetteIndexEntry{Targeted Viral Load Testing}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+**Type** Package
+
+**Title** Targeted Viral Load Testing
+
+**Version** 1.0
+
+**Date** "`r Sys.Date()`"
+
+**Authors** Yizhen Xu, Tao Liu, Joseph Hogan
+
+**Maintainer** Yizhen (yizhen_xu@brown.edu)
+
+**Description** This package implements the optimal allocation of viral load testing under constrained availability.
+
+**License** ???
+
+**URL**  https://github.com/yizhenxu/TVLT
+
+**Depends** R (>= 3.2.0)
+
+**LazyData** true
+
+<!-- START doctoc -->
+<!-- END doctoc -->
+
+###Check.exp.tilt
+
+*Check exponential tilt model assumption*
+
+####Description
+
+> This function provides graphical assessment to the suitability of the exponential tilt model for risk score in finding optimal tripartite rules by semiparametric approach.
+$$g_1(s) = exp(\beta_0^*+\beta_1*s)*g_0(s)$$
+
+####Usage
+
+> Check.exp.tilt( Z, S)
+
+
+####Arguments
+
+> - **Z** &nbsp;&nbsp;&nbsp;&nbsp; True disease status (No disease / treatment success coded as Z=0, diseased / treatment failure coded as Z=1).
+> - **S**  &nbsp;&nbsp;&nbsp;&nbsp;  Risk score.
+
+####Value
+
+> Returns the plot of empirical density for risk score S, joint empirical density for (S,Z=1) and (S,Z=0), and the density under the exponential tilt model assumption for (S,Z=1) and (S,Z=0).
+
+####Author(s)
+
+> Yizhen Xu (yizhen_xu@brown.edu), Tao Liu, Joseph Hogan
+
+####References
+
+> T. Liu, J. Hogan, L. Wang, S. Zhang, R. Kantor (2013) *Journal of the American Statistical Association* Vol.108, No.504
+
+####Examples
+
+```{r,eval=FALSE}
+d = Simdata
+Z = d$Z # True Disease Status
+S = d$S # Risk Score
+Check.exp.tilt( Z, S)
+```
+_____
+
+###CV.TVLT
+
+*Cross Validation*
+
+####Description
+
+> This function allows you to compute the average of misdiagnoses rate for viral failure and the optimal risk under min $\lambda$ rules from K-fold cross-validation.
+
+####Usage
+
+> CV.TVLT(Z, S, phi, K = 10, method = "semipar", lambda)
+
+
+####Arguments
+
+> - **Z** &nbsp;&nbsp;&nbsp;&nbsp; True disease status (No disease / treatment success coded as Z=0, diseased / treatment failure coded as Z=1).
+> - **S**  &nbsp;&nbsp;&nbsp;&nbsp;  Risk score.
+> - **phi**  &nbsp;&nbsp;&nbsp;&nbsp;  Percentage of patients taking viral load test.
+> - **K**  &nbsp;&nbsp;&nbsp;&nbsp; Number of folds in cross validation. The default is 10.
+> - **method**  &nbsp;&nbsp;&nbsp;&nbsp; The method to be used. The default is "nonpar", which returns result using nonparametric method. Another possible value is "semipar", which returns result estimated by semiparametric method assuming exponential tilt.
+> - **lambda** &nbsp;&nbsp;&nbsp;&nbsp; A user-specified weight that reflects relative loss for the two types of misdiagnoses, taking value in [0,1]. $Loss=\lambda*I(FN)+(1-\lambda)*I(FP)$.
+ 
+####Value
+
+> Cross validated results on false classification rates (FNR, FPR), $\lambda-$ risk, total misclassification rate and AUC.
+
+####Author(s)
+
+> Yizhen Xu (yizhen_xu@brown.edu), Tao Liu, Joseph Hogan
+
+####References
+
+> T. Liu, J. Hogan, L. Wang, S. Zhang, R. Kantor (2013) *Journal of the American Statistical Association* Vol.108, No.504
+
+####Examples
+
+```{r,eval=FALSE}
+d = Simdata
+Z = d$Z # True Disease Status
+S = d$S # Risk Score
+phi = 0.1 #10\% of patients taking viral load test
+lambda =0.5
+CV.TVLT(Z, S, phi, K = 10, method = "semipar", lambda)
+```
+
+
+_____
+
+###Opt.nonpar.rule
+
+*Optimal Nonparametric Rule*
+
+####Description
+
+> This function gives you the optimal nonparametric tripartite rule that minimizes the min $\lambda$ rules.
+
+####Usage
+
+> Opt.nonpar.rule( Z, S, phi, lambda)
+
+
+####Arguments
+
+> - **Z** &nbsp;&nbsp;&nbsp;&nbsp; True disease status (No disease / treatment success coded as Z=0, diseased / treatment failure coded as Z=1).
+> - **S**  &nbsp;&nbsp;&nbsp;&nbsp;  Risk score.
+> - **phi**  &nbsp;&nbsp;&nbsp;&nbsp;  Percentage of patients taking viral load test.
+> - **lambda** &nbsp;&nbsp;&nbsp;&nbsp; A user-specified weight that reflects relative loss for the two types of misdiagnoses, taking value in [0,1]. $Loss=\lambda*I(FN)+(1-\lambda)*I(FP)$.
+ 
+####Value
+
+> Optimal nonparametric rule and its associated misclassification rates (FNR, FPR), optimal lambda risk, and total misclassification rate (TMR). 
+
+####Author(s)
+
+> Yizhen Xu (yizhen_xu@brown.edu), Tao Liu, Joseph Hogan
+
+####References
+
+> T. Liu, J. Hogan, L. Wang, S. Zhang, R. Kantor (2013) *Journal of the American Statistical Association* Vol.108, No.504
+
+####Examples
+
+```{r,eval=FALSE}
+d = Simdata
+Z = d$Z # True Disease Status
+S = d$S # Risk Score
+phi = 0.1 #10\% of patients taking viral load test
+lambda = 0.5
+Opt.nonpar.rule( Z, S, phi, lambda)
+```
+
+_____
+
+###Opt.semipar.rule
+
+*Optimal Semiparametric Rule*
+
+####Description
+
+> This function gives you the optimal semiparametric tripartite rule that minimizes the min $\lambda$ rules.
+
+####Usage
+
+> Opt.semipar.rule( Z, S, phi, lambda)
+
+
+####Arguments
+
+> - **Z** &nbsp;&nbsp;&nbsp;&nbsp; True disease status (No disease / treatment success coded as Z=0, diseased / treatment failure coded as Z=1).
+> - **S**  &nbsp;&nbsp;&nbsp;&nbsp;  Risk score.
+> - **phi**  &nbsp;&nbsp;&nbsp;&nbsp;  Percentage of patients taking viral load test.
+> - **lambda** &nbsp;&nbsp;&nbsp;&nbsp; A user-specified weight that reflects relative loss for the two types of misdiagnoses, taking value in [0,1]. $Loss=\lambda*I(FN)+(1-\lambda)*I(FP)$.
+ 
+####Value
+
+> Optimal semiparametric rule and its associated misclassification rates (FNR, FPR), optimal lambda risk, and total misclassification rate (TMR). 
+
+####Author(s)
+
+> Yizhen Xu (yizhen_xu@brown.edu), Tao Liu, Joseph Hogan
+
+####References
+
+> T. Liu, J. Hogan, L. Wang, S. Zhang, R. Kantor (2013) *Journal of the American Statistical Association* Vol.108, No.504
+
+####Examples
+
+```{r,eval=FALSE}
+d = Simdata
+Z = d$Z # True Disease Status
+S = d$S # Risk Score
+phi = 0.1 #10% of patients taking viral load test
+lambda = 0.5
+Opt.semipar.rule( Z, S, phi, lambda)
+```
+_____
+
+###ROC.nonpar
+
+*Nonparametric ROC Analysis*
+
+####Description
+
+> This function performs ROC analysis for tripartite rules by nonparametric approach. If 'plot=TRUE', the ROC curve is returned.
+
+####Usage
+
+> ROC.nonpar( Z, S, phi,plot=TRUE)
+
+####Arguments
+
+> - **Z** &nbsp;&nbsp;&nbsp;&nbsp; True disease status (No disease / treatment success coded as Z=0, diseased / treatment failure coded as Z=1).
+> - **S**  &nbsp;&nbsp;&nbsp;&nbsp;  Risk score.
+> - **phi**  &nbsp;&nbsp;&nbsp;&nbsp;  Percentage of patients taking viral load test.
+ 
+####Value
+
+> - **AUC**   &nbsp;&nbsp;&nbsp;&nbsp; The area under the ROC curve.
+> - **FNR**   &nbsp;&nbsp;&nbsp;&nbsp; Misdiagnoses rate for viral failure (false negative rate).
+> - **FPR**  &nbsp;&nbsp;&nbsp;&nbsp; Misdiagnoses rate for treatment failure (false positive rate).
+ 
+####Author(s)
+
+Yizhen Xu (yizhen_xu@brown.edu), Tao Liu, Joseph Hogan
+
+####References
+
+> T. Liu, J. Hogan, L. Wang, S. Zhang, R. Kantor (2013) *Journal of the American Statistical Association* Vol.108, No.504
+
+####Examples
+
+```{r,eval=FALSE}
+d = Simdata
+Z = d$Z # True Disease Status
+S = d$S # Risk Score
+phi = 0.1 #10% of patients taking viral load test
+a = ROC.nonpar( Z, S, phi,plot=TRUE)
+a$AUC
+a$FNR
+a$FPR
+```
+_____
+
+###ROC.semipar
+
+*Semiparametric ROC Analysis*
+
+####Description 
+
+> This function performs ROC analysis for tripartite rules by semiparametric approach. If 'plot=TRUE', the ROC curve is returned.
+
+####Usage
+
+> ROC.semipar( Z, S, phi,plot=TRUE)
+
+####Arguments
+
+> - **Z** &nbsp;&nbsp;&nbsp;&nbsp; True disease status (No disease / treatment success coded as Z=0, diseased / treatment failure coded as Z=1).
+> - **S**  &nbsp;&nbsp;&nbsp;&nbsp;  Risk score.
+> - **phi**  &nbsp;&nbsp;&nbsp;&nbsp;  Percentage of patients taking viral load test.
+ 
+####Value
+
+> - **AUC**   &nbsp;&nbsp;&nbsp;&nbsp; The area under the ROC curve.
+> - **FNR**   &nbsp;&nbsp;&nbsp;&nbsp; Misdiagnoses rate for viral failure (false negative rate).
+> - **FPR**  &nbsp;&nbsp;&nbsp;&nbsp; Misdiagnoses rate for treatment failure (false positive rate).
+ 
+####Author(s)
+
+Yizhen Xu (yizhen_xu@brown.edu), Tao Liu, Joseph Hogan
+
+####References
+
+> T. Liu, J. Hogan, L. Wang, S. Zhang, R. Kantor (2013) *Journal of the American Statistical Association* Vol.108, No.504
+
+####Examples
+
+```{r,eval=FALSE}
+d = Simdata
+Z = d$Z # True Disease Status
+S = d$S # Risk Score
+phi = 0.1 #10% of patients taking viral load test
+a = ROC.semipar( Z, S, phi,plot=TRUE)
+a$AUC
+a$FNR
+a$FPR
+```
+
+_____
+
+###Rules.set
+
+*Nonparametric Rules Set*
+
+####Description
+
+> This function gives you all possible cutoffs [l,u] for tripartite rules, by applying nonparametric search to the given data.
+$$P(S \in [l,u]) \le \phi$$
+
+####Usage
+
+> Rules.set( Z, S, phi)
+
+####Arguments
+
+> - **Z** &nbsp;&nbsp;&nbsp;&nbsp; True disease status (No disease / treatment success coded as Z=0, diseased / treatment failure coded as Z=1).
+> - **S**  &nbsp;&nbsp;&nbsp;&nbsp;  Risk score.
+> - **phi**  &nbsp;&nbsp;&nbsp;&nbsp;  Percentage of patients taking viral load test.
+ 
+####Value
+
+> Matrix with 4 columns. Each row is a possible tripartite rule, with output on lower cutoff, upper cutoff and corresponding misclassification rates (FNR, FPR).
+ 
+####Author(s)
+
+> Yizhen Xu (yizhen_xu@brown.edu), Tao Liu, Joseph Hogan
+
+####References
+
+> T. Liu, J. Hogan, L. Wang, S. Zhang, R. Kantor (2013) *Journal of the American Statistical Association* Vol.108, No.504
+
+####Examples
+
+```{r,eval=FALSE}
+d = Simdata
+Z = d$Z # True Disease Status
+S = d$S # Risk Score
+phi = 0.1 #10\% of patients taking viral load test
+Rules.set( Z, S, phi)
+```
+
+_____
+
+###Semi.par.rule
+
+*Min TMR Semiparametric Rule*
+
+####Description
+
+> This function gives you the optimal semiparametric tripartite rule that minimizes TMR (total misclassification risk).
+
+####Usage
+
+> Semi.par.rule( Z, S, phi)
+
+####Arguments
+
+> - **Z** &nbsp;&nbsp;&nbsp;&nbsp; True disease status (No disease / treatment success coded as Z=0, diseased / treatment failure coded as Z=1).
+> - **S**  &nbsp;&nbsp;&nbsp;&nbsp;  Risk score.
+> - **phi**  &nbsp;&nbsp;&nbsp;&nbsp;  Percentage of patients taking viral load test.
+ 
+####Value
+
+> Optimal semiparametric rule (lower and upper cutoff) and its associated minimized TMR.
+ 
+####Author(s)
+
+> Yizhen Xu (yizhen_xu@brown.edu), Tao Liu, Joseph Hogan
+
+####References
+
+> T. Liu, J. Hogan, L. Wang, S. Zhang, R. Kantor (2013) *Journal of the American Statistical Association* Vol.108, No.504
+
+####Examples
+
+```{r,eval=FALSE}
+d = Simdata
+Z = d$Z # True Disease Status
+S = d$S # Risk Score
+phi = 0.1 #10\% of patients taking viral load test
+Semi.par.rule( Z, S, phi)
+```
+_____
+
+###Simdata
+
+*Simulated data for package illustration*
+
+####Description
+
+> A simulated dataset containing true disease status, CD4 count, and risk score. Simulation parameters are determined by fitting a dataset from  Miriam Immunology Clinic. See details.
+
+####Format
+
+> A data frame with 5000 simulated observations on the following 3 variables.
+> - **Z** &nbsp;&nbsp;&nbsp;&nbsp; True disease status (No disease / treatment success coded as Z=0, diseased / treatment failure coded as Z=1).
+> - **CD4**  &nbsp;&nbsp;&nbsp;&nbsp;  Simulated CD4 count with different distribution with respect to different disease status.
+> - **S**  &nbsp;&nbsp;&nbsp;&nbsp;  Risk score defined as the negative value of CD4 count.
+ 
+####Details
+
+> We first simulate viral status $Z$ assuming $Z\sim Bernoulli(p)$ with $p=0.25$ which was estimated from the Miriam Immunology Clinic data; and then conditonal on $Z$, simulate ${CD4|Z=z}=ceiling(W)$ with $W\sim Gamma(\eta_z,\kappa_z)$ where $\eta$ and $\kappa$ are shape and scale parameters.$(\eta_0,\kappa_0)=(3.2,152)$ and $(\eta_1,\kappa_1)=(2.3,133)$. Parameter values are chosen as maximum likelihood estimates obtained by fitting gamma distributions to the Miriam Immunology Clinic data.
+ 
+####Author(s)
+
+> Yizhen Xu (yizhen_xu@brown.edu), Tao Liu, Joseph Hogan
+
+####References
+
+> T. Liu, J. Hogan, L. Wang, S. Zhang, R. Kantor (2013) *Journal of the American Statistical Association* Vol.108, No.504
+
+####Examples
+
+```{r,eval=FALSE}
+data(Simdata)
+summary(Simdata)
+plot(Simdata)
+```
+_____
+
+###TVLT.summ
+
+*Summary of Disease Status and Risk Score*
+
+####Description
+
+> This function allows you to compute the percentage of diseased (equivalent to treatment failure Z=1) and show distribution summary of risk score (S) by the true disease status (Z).
+
+####Usage
+
+> TVLT.summ(Z,S)
+
+####Arguments
+
+> - **Z** &nbsp;&nbsp;&nbsp;&nbsp; True disease status (No disease / treatment success coded as Z=0, diseased / treatment failure coded as Z=1).
+> - **S**  &nbsp;&nbsp;&nbsp;&nbsp;  Risk score.
+
+
+####Value
+
+> Percentage of treatment failure; Summary statistics (mean, standard deviation, minimum, median, maximum and IQR) of risk score by true disease status; Distribution plot.
+ 
+####Author(s)
+
+> Yizhen Xu (yizhen_xu@brown.edu), Tao Liu, Joseph Hogan
+
+####References
+
+> T. Liu, J. Hogan, L. Wang, S. Zhang, R. Kantor (2013) *Journal of the American Statistical Association* Vol.108, No.504
+
+####Examples
+
+```{r,eval=FALSE}
+d = Simdata
+Z = d$Z # True Disease Status
+S = d$S # Risk Score
+TVLT.summ(Z,S)
+```
