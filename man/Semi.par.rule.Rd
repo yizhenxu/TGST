@@ -2,7 +2,7 @@
 % Please edit documentation in R/Semi.par.rule.R
 \name{Semi.par.rule}
 \alias{Semi.par.rule}
-\title{Semiparametric Rule}
+\title{Min TMR Semiparametric Rule}
 \usage{
 Semi.par.rule(Z, S, phi)
 }
@@ -20,7 +20,7 @@ Semiparametric rule and its associated TMR.
 This function gives you the optimal semiparametric tripartite rule that minimizes TMR (total misclassification risk).
 }
 \examples{
-data = Simdata
+d = Simdata
 Z = d$Z # True Disease Status
 S = d$S # Risk Score
 phi = 0.1 #10\% of patients taking viral load test

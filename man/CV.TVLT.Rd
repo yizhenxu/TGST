@@ -20,16 +20,14 @@ CV.TVLT(Z, S, phi, K = 10, method = "nonpar", lambda)
 \item{lambda}{A user-specified weight that reflects relative loss for the two types of misdiagnoses, taking value in \eqn{[0,1]}. \eqn{Loss=\lambda*I(FN)+(1-\lambda)*I(FP)}.}
 }
 \value{
-
-Cross validated results on false classification rates (FNR, FPR), $\lambda-$ risk, total misclassification rate and AUC.
-
+Cross-validation results.
 }
 \description{
 This function allows you to compute the average of misdiagnoses rate for viral failure and the optimal risk under min-\eqn{\lambda} rules
 from K-fold cross-validation.
 }
 \examples{
-d = Simdata
+data = Simdata
 Z = d$Z # True Disease Status
 S = d$S # Risk Score
 phi = 0.1 #10\% of patients taking viral load test
