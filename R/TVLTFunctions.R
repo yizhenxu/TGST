@@ -86,7 +86,26 @@ nonpar.rules <- function(Z,S,phi){
 
 
 
-#Nonparametric FNR FPR of the rules
+
+#' Nonparametric FNR FPR of the rules
+#'
+#' This function gives you the nonparametric FNR and FPR associated with a given tripartite rule.
+#' @param Z True disease status (No disease / treatment success coded as Z=0, diseased / treatment failure coded as Z=1). 
+#' @param S Risk score. 
+#' @param l Lower cutoff of tripartite rule. 
+#' @param u Upper cutoff of tripartite rule. 
+#' @return 
+#' Matrix with 2 columns. Each row is a set of nonparametric (FNR, FPR) on an associated tripartite rule.
+#' @keywords Nonparametric, tripartite rules, FNR, FPR.
+#' @export
+#' @examples
+#' d = Simdata
+#' Z = d$Z # True Disease Status
+#' S = d$S # Risk Score
+#' phi = 0.1 #10% of patients taking viral load test
+#' rules = nonpar.rules( Z, S, phi)
+#' nonpar.fnr.fpr(Z,S,rules[1,1],rules[1,2])
+
 nonpar.fnr.fpr <- function(Z,S,l,u){
   if(length(l)!=length(u))   #l is lower cutoff, u is upper cutoff
     cat("***** Warning: Wrong rules set. \n")
@@ -103,7 +122,24 @@ nonpar.fnr.fpr <- function(Z,S,l,u){
 
 
 
-#Semiparametric FNR FPR of the rules
+#' Semiparametric FNR FPR of the rules
+#'
+#' This function gives you the semiparametric FNR and FPR associated with a given tripartite rule.
+#' @param Z True disease status (No disease / treatment success coded as Z=0, diseased / treatment failure coded as Z=1). 
+#' @param S Risk score. 
+#' @param l Lower cutoff of tripartite rule. 
+#' @param u Upper cutoff of tripartite rule. 
+#' @return 
+#' Matrix with 2 columns. Each row is a set of semiparametric (FNR, FPR) on an associated tripartite rule.
+#' @keywords Semiparametric, tripartite rules, FNR, FPR.
+#' @export
+#' @examples
+#' d = Simdata
+#' Z = d$Z # True Disease Status
+#' S = d$S # Risk Score
+#' phi = 0.1 #10% of patients taking viral load test
+#' rules = nonpar.rules( Z, S, phi)
+#' semipar.fnr.fpr(Z,S,rules[1,1],rules[1,2])
 
 semipar.fnr.fpr <- function(Z,S,l,u){
   if(length(l)!=length(u))   #l is lower cutoff, u is upper cutoff
@@ -148,7 +184,25 @@ semipar.fnr.fpr <- function(Z,S,l,u){
 
 
 
-#Calculate AUC
+
+#' Calculate AUC
+#'
+#' This function gives you the AUC associated with the rules set.
+#' @param Z True disease status (No disease / treatment success coded as Z=0, diseased / treatment failure coded as Z=1). 
+#' @param S Risk score. 
+#' @param l Lower cutoff of all possible tripartite rules. 
+#' @param u Upper cutoff of all possible tripartite rules. 
+#' @return 
+#' AUC.
+#' @keywords ROC analysis, AUC.
+#' @export
+#' @examples
+#' d = Simdata
+#' Z = d$Z # True Disease Status
+#' S = d$S # Risk Score
+#' phi = 0.1 #10% of patients taking viral load test
+#' rules = nonpar.rules( Z, S, phi)
+#' cal.AUC(Z,S,rules[,1],rules[,2])
 
 cal.AUC <- function(Z,S,l,u){
   ## AUC
