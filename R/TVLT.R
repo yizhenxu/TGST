@@ -36,7 +36,7 @@ TVLT <- function(Z, S, phi, method="nonpar"){
     logic <- FALSE
     fnr.fpr <-  semipar.fnr.fpr(Z,S,rules[,1],rules[,2])
   }
-  colnames(fnr.fpr) <- c("FNR","FPR")
+  colnames(fnr.fpr) <- c("FNR","FPR")#add column names
   result=new("TVLT", phi=phi, Z=Z, S=S, Rules=rules, Nonparametric=logic, FNR.FPR=fnr.fpr)
   
   return(result)

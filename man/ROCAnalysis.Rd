@@ -2,7 +2,7 @@
 % Please edit documentation in R/ROCAnalysis.R
 \name{ROCAnalysis}
 \alias{ROCAnalysis}
-\title{Nonparametric ROC Analysis}
+\title{ROC Analysis}
 \usage{
 ROCAnalysis(Obj, plot = TRUE)
 }
@@ -15,7 +15,7 @@ ROCAnalysis(Obj, plot = TRUE)
 AUC (the area under ROC curve) and ROC curve.
 }
 \description{
-This function performs ROC analysis for tripartite rules by nonparametric approach. If \eqn{plot=TRUE}, the ROC curve is returned.
+This function performs ROC analysis for tripartite rules. If \eqn{plot=TRUE}, the ROC curve is returned.
 }
 \examples{
 d = Simdata
