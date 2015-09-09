@@ -1,6 +1,6 @@
-#' Nonparametric ROC Analysis
+#' ROC Analysis
 #'
-#' This function performs ROC analysis for tripartite rules by nonparametric approach. If \eqn{plot=TRUE}, the ROC curve is returned.
+#' This function performs ROC analysis for tripartite rules. If \eqn{plot=TRUE}, the ROC curve is returned.
 #' @param Obj An object of class TVLT. 
 #' @param plot Logical parameter indicating if ROC curve should be plotted. Default is \code{plot=TRUE}. If false, then only AUC is calculated.
 #' @return 

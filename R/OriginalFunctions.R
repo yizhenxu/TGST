@@ -66,14 +66,18 @@ TVLT.summ = function(Z,S){
 #' Opt.nonpar.rule( Z, S, phi, lambda)
 
 Opt.nonpar.rule <- function(Z,S,phi,lambda){
-  rules <- Rules.set(Z,S,phi)
+  rules <- nonpar.rules(Z,S,phi)
+  fnr.fpr <- nonpar.fnr.fpr(Z,S,rules[,1],rules[,2])
+  fnr <- fnr.fpr[,1]
+  fpr <- fnr.fpr[,2]
   p <- mean(Z,na.rm=TRUE)
-  risk <- rules[,3]*p*lambda + rules[,4]*(1-p)*(1-lambda)
+  risk <- fnr*p*lambda + fpr*(1-p)*(1-lambda)
   index <- which.min(risk)
   opt.risk <- risk[index]
   opt.rule <- rules[index,]
-  TMR <- rules[index,3]*p + rules[index,4]*(1-p)
-  z <- c(opt.rule,opt.risk,TMR)
+  opt.fnr.fpr <- fnr.fpr[index,]
+  TMR <- fnr.fpr[index,1]*p + fnr.fpr[index,2]*(1-p)
+  z <- c(opt.rule,opt.fnr.fpr,opt.risk,TMR)
   names(z) <- c("lower.cutoff","upper.cutoff","FNR","FPR","opt.risk","TMR")
   return(z)
 }
