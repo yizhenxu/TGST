@@ -11,3 +11,4 @@ License: What license is it under?
 LazyData: true
 Suggests: knitr
 VignetteBuilder: knitr
+Imports: ggplot2

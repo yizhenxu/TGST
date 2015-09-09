@@ -77,29 +77,12 @@ setMethod(
     names(summ.S1) = c("mean","sd","min","median","max","IQR.L","IQR.U")
 
     #risk score distribution plot by disease status
-    o<-par("xpd", "mar") #save the original par setting
-    layout(rbind(1,2), heights=c(7,1))  # put legend on bottom 1/8th of the chart
-    #layout.show(2) #show layout
-    # setup margins for the main plot
-    par(mar=c(2,4,4,2)+0.1)
-    s.min = min(S)
-    s.max = max(S)
-    dens0 = density(S0, na.rm = T, from = s.min, to = s.max)
-    dens1 = density(S1, na.rm = T, from = s.min, to = s.max)
-    yrange = range(c(dens0$y,dens1$y))
-    plot(dens0,ylim = yrange, col="blue",
-         xlab="Risk Score S", ylab="Population Distributions",main="Risk Score Distribution")
-    lines(dens1,col="red")
-    # setup for no margins on the legend
-    par(mar=c(0, 0, 0, 0))
-    # c(bottom, left, top, right)
-    plot.new()
+    dat=data.frame(Z=as.factor(Z), S=S)
+    #library(ggplot2)
+    ggplot(dat, aes(x=S, fill=Z)) + geom_density(alpha=.3)+ scale_fill_discrete(name="Viral Failure",
+                                                                                breaks=c("0","1"),
+                                                                                labels=c("Z=0","Z=1"))
     
-    legend('center','group',c("Z=0","Z=1"), lty = c(1,1),
-           col=c("blue","red"),ncol=2,bty ="n",cex=0.8)
-    
-    par(o) #back to original par setting
-
     #output
     z = list(Percent_of_Viral_Failure=percF,SummaryS0=summ.S0,SummaryS1=summ.S1)
     return(z)
