@@ -1,5 +1,5 @@
 # TVLT
-This is a package for targerd viral load testing.
+This is a package for targeted viral load testing.
 
 See reference:
 
