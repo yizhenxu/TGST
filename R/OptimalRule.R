@@ -25,12 +25,19 @@ OptimalRule <- function(Obj,lambda){
   fpr <- Obj@FNR.FPR[,2]
   risk <- fnr*p*lambda + fpr*(1-p)*(1-lambda)
   index <- which.min(risk)
-  opt.risk <- risk[index]
+  if(0){
+    opt.risk <- risk[index]
+    opt.rule <- Obj@Rules[index,]
+    opt.fnr.fpr <- Obj@FNR.FPR[index,]
+    TMR <- fnr[index]*p + fpr[index]*(1-p)
+    z <- c(opt.rule,opt.fnr.fpr,opt.risk,TMR)
+    names(z) <- c("lower.cutoff","upper.cutoff","FNR","FPR","opt.risk","TMR")
+    return(z)
+  }
   opt.rule <- Obj@Rules[index,]
-  opt.fnr.fpr <- Obj@FNR.FPR[index,]
-  TMR <- fnr[index]*p + fpr[index]*(1-p)
-  z <- c(opt.rule,opt.fnr.fpr,opt.risk,TMR)
-  names(z) <- c("lower.cutoff","upper.cutoff","FNR","FPR","opt.risk","TMR")
-  return(z)
+  names(opt.rule) <- c("lower.cutoff","upper.cutoff")
+  result=new("Output", phi=Obj@phi, Z=Obj@Z, S=Obj@S, Rules=Obj@Rules, Nonparametric=Obj@Nonparametric, FNR.FPR=Obj@FNR.FPR, OptRule=opt.rule)
+  print(opt.rule)
+  return(invisible(result))
   
 }
