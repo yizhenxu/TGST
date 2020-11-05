@@ -1,7 +1,7 @@
 #' Check exponential tilt model assumption
 #'
 #' This function provides graphical assessment to the suitability of the exponential tilt model for risk score in finding optimal tripartite rules by semiparametric approach. 
-#' \deqn{g1(s)=exp(\tilde{\beta0}+\beta1*s)*g0(s)} 
+#' \deqn{g1(s)=exp(\tilde{\beta}_{0}+\beta_{1}*s)*g0(s)} 
 #' @param Z True disease status (No disease / treatment success coded as Z=0, diseased / treatment failure coded as Z=1). 
 #' @param S Risk score. 
 #' @return 
