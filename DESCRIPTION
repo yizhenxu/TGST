@@ -1,4 +1,4 @@
-Package: TVLT
+Package: TGST
 Title: Targeted Viral Load Testing
 Version: 1.0
 Authors@R: c(
@@ -12,3 +12,4 @@ LazyData: true
 Suggests: knitr
 VignetteBuilder: knitr
 Imports: ggplot2
+RoxygenNote: 7.1.0
