@@ -2,9 +2,7 @@
 #'
 #' This function allows you to compute the average of misdiagnoses rate for viral failure and the optimal risk under min-\eqn{\lambda} rules
 #' from K-fold cross-validation.
-#' @param Z True disease status (No disease / treatment success coded as Z=0, diseased / treatment failure coded as Z=1). 
-#' @param S Risk score. 
-#' @param phi Percentage of patients taking viral load test. 
+#' @param Obj An object of class TGST. 
 #' @param lambda A user-specified weight that reflects relative loss for the two types of misdiagnoses, taking value in \eqn{[0,1]}. \eqn{Loss=\lambda*I(FN)+(1-\lambda)*I(FP)}.
 #' @param K Number of folds in cross validation. The default is 10.
 #' @param method The method to be used. The default is "nonpar", which returns result using nonparametric method. Another possible value is "semipar", which returns result estimated by semiparametric method assuming exponential tilt.
@@ -16,14 +14,13 @@
 #' Z = d$Z # True Disease Status
 #' S = d$S # Risk Score
 #' phi = 0.1 #10% of patients taking viral load test
-#' lambda =0.5
-#' CV.TGST(Z, S, phi, K = 10, method = "semipar", lambda)
+#' Obj = TVLT(Z, S, phi, method="nonpar")
+#' CV.TGST(Obj, lambda, K=10)
 
-CV.TGST <- function(Z, S, phi, K = 10, method = "nonpar", lambda){
-  or.data <- cbind(Z,S)
-  data <- or.data[complete.cases(or.data),]
-  Z <- data[,1]
-  S <- data[,2]
+CV.TGST <- function(Obj, lambda, K = 10){
+  Z <- Obj@Z
+  S <- Obj@S
+  data <- cbind(Z,S)
   n <- length(Z)
   n.sub <- floor(n/K)
   r <- n-n.sub*K
@@ -42,19 +39,17 @@ CV.TGST <- function(Z, S, phi, K = 10, method = "nonpar", lambda){
     val.dat <- data[fld.flg==i,]
     p <- mean(val.dat[,1])
     
-    if(method == "nonpar"){
-    
+    if(Obj@Nonparametric==TRUE){
+      
       opt.rule <- Opt.nonpar.rule(train.dat[,1],train.dat[,2],phi,lambda)
       fnr.fpr[i,] <- nonpar.fnr.fpr(val.dat[,1],val.dat[,2],opt.rule[1],opt.rule[2])
-
-    } else if (method == "semipar"){
+      
+    } else {
       
       opt.rule <- Opt.semipar.rule(train.dat[,1],train.dat[,2],phi,lambda)
       fnr.fpr[i,] <- semipar.fnr.fpr(val.dat[,1],val.dat[,2],opt.rule[1],opt.rule[2])
-
-    } else {
-      cat("Wrong method input!\n")
-    }
+      
+    } 
     
     risk[i] <- fnr.fpr[i,1]*p*lambda + fnr.fpr[i,2]*(1-p)*(1-lambda)
     
@@ -62,7 +57,7 @@ CV.TGST <- function(Z, S, phi, K = 10, method = "nonpar", lambda){
   
   result <- apply(cbind(fnr.fpr,risk),2,mean)
   names(result) <- c("avr.FNR","avr.FPR","avr.risk")
-
+  
   return(result)
-
+  
 }

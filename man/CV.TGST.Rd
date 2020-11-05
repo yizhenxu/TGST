@@ -4,20 +4,16 @@
 \alias{CV.TGST}
 \title{Cross Validation}
 \usage{
-CV.TGST(Z, S, phi, K = 10, method = "nonpar", lambda)
+CV.TGST(Obj, lambda, K = 10)
 }
 \arguments{
-\item{Z}{True disease status (No disease / treatment success coded as Z=0, diseased / treatment failure coded as Z=1).}
+\item{Obj}{An object of class TGST.}
 
-\item{S}{Risk score.}
-
-\item{phi}{Percentage of patients taking viral load test.}
+\item{lambda}{A user-specified weight that reflects relative loss for the two types of misdiagnoses, taking value in \eqn{[0,1]}. \eqn{Loss=\lambda*I(FN)+(1-\lambda)*I(FP)}.}
 
 \item{K}{Number of folds in cross validation. The default is 10.}
 
 \item{method}{The method to be used. The default is "nonpar", which returns result using nonparametric method. Another possible value is "semipar", which returns result estimated by semiparametric method assuming exponential tilt.}
-
-\item{lambda}{A user-specified weight that reflects relative loss for the two types of misdiagnoses, taking value in \eqn{[0,1]}. \eqn{Loss=\lambda*I(FN)+(1-\lambda)*I(FP)}.}
 }
 \value{
 Cross-validation results.
@@ -31,8 +27,8 @@ data = Simdata
 Z = d$Z # True Disease Status
 S = d$S # Risk Score
 phi = 0.1 #10\% of patients taking viral load test
-lambda =0.5
-CV.TGST(Z, S, phi, K = 10, method = "semipar", lambda)
+Obj = TVLT(Z, S, phi, method="nonpar")
+CV.TGST(Obj, lambda, K=10)
 }
 \keyword{Cross}
 \keyword{FNR,}
