@@ -7,7 +7,7 @@
 \alias{TGST-method}
 \title{summary function.}
 \usage{
-\S4method{summary}{TGST}(object, ...)
+\S4method{summary}{TGST}(object)
 }
 \arguments{
 \item{object}{Output object from \code{\link{TGST}}.}
@@ -18,5 +18,5 @@ Summary statistics (mean, standard deviation, minimum, median, maximum and IQR) 
 Distribution plot.
 }
 \description{
-This function This function gives the summary of the data from \code{TGST}.
+This function gives the summary of the data from \code{TGST}.
 }

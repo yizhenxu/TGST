@@ -57,10 +57,9 @@ setClass(
 #' @docType methods
 #' @exportMethod plot
 #' @aliases plot, TGST-method
-setMethod(
-  f="plot",
-  signature = "TGST",
-  definition = function(object,...) {
+setGeneric(
+  "plot",
+  function(object) {
     Z = object@Z
     S = object@S
     
@@ -91,8 +90,8 @@ setMethod(
 #' @aliases summary, TGST-method
 setMethod(
   f="summary",
-  signature = "TGST",
-  definition = function(object,...) {
+  signature(object = "TGST"),
+  definition = function(object) {
     Z = object@Z
     S = object@S
     S0 = S[Z==0]
