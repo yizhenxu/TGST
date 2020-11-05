@@ -44,11 +44,40 @@ setClass(
   )
 )
 
+#'
+#' plot function.
+#' 
+#' This function gives the summary plot of the data from \code{TGST}.
+#' 
+#' @param object Output object from \code{\link{TGST}}.
+#' @return 
+#' Distribution plot.
+#' @name plot
+#' @rdname plot-methods
+#' @docType methods
+#' @exportMethod plot
+#' @aliases plot, TGST-method
+setMethod(
+  f="plot",
+  signature = "TGST",
+  definition = function(object,...) {
+    Z = object@Z
+    S = object@S
+    
+    #risk score distribution plot by disease status
+    dat=data.frame(Z=as.factor(Z), S=S)
+    #library(ggplot2)
+    fig = ggplot(dat, aes(x=S, fill=Z)) + geom_density(alpha=.3)+ scale_fill_discrete(name="Viral Failure",
+                                                                                breaks=c("0","1"),
+                                                                                labels=c("Z=0","Z=1"))
+    print(fig)
+  }
+)
 
 #'
 #' summary function.
 #' 
-#' This function This function gives the summary of the data from \code{TGST}.
+#' This function gives the summary of the data from \code{TGST}.
 #' 
 #' @param object Output object from \code{\link{TGST}}.
 #' @return 
@@ -59,7 +88,7 @@ setClass(
 #' @rdname summary-methods
 #' @docType methods
 #' @exportMethod summary
-#' @aliases summary summary, TGST-method
+#' @aliases summary, TGST-method
 setMethod(
   f="summary",
   signature = "TGST",
@@ -75,19 +104,17 @@ setMethod(
     names(summ.S0) = c("mean","sd","min","median","max","IQR.L","IQR.U")
     summ.S1 = c(mean(S1,na.rm = T),sd(S1,na.rm = T),min(S1,na.rm = T),median(S1,na.rm = T),max(S1,na.rm = T),quantile(S1,probs=c(0.25,0.75),na.rm = T))
     names(summ.S1) = c("mean","sd","min","median","max","IQR.L","IQR.U")
-
+    
     #risk score distribution plot by disease status
     dat=data.frame(Z=as.factor(Z), S=S)
     #library(ggplot2)
-    ggplot(dat, aes(x=S, fill=Z)) + geom_density(alpha=.3)+ scale_fill_discrete(name="Viral Failure",
-                                                                                breaks=c("0","1"),
-                                                                                labels=c("Z=0","Z=1"))
-    
+    fig = ggplot(dat, aes(x=S, fill=Z)) + geom_density(alpha=.3)+ scale_fill_discrete(name="Viral Failure",
+                                                                                      breaks=c("0","1"),
+                                                                                      labels=c("Z=0","Z=1"))
+    print(fig)
     #output
     z = list(Percent_of_Viral_Failure=percF,SummaryS0=summ.S0,SummaryS1=summ.S1)
     return(z)
   }
 )
-
-
 
