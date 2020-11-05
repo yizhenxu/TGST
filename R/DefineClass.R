@@ -45,35 +45,6 @@ setClass(
 )
 
 #'
-#' plot function.
-#' 
-#' This function gives the summary plot of the data from \code{TGST}.
-#' 
-#' @param object Output object from \code{\link{TGST}}.
-#' @return 
-#' Distribution plot.
-#' @name plot
-#' @rdname plot-methods
-#' @docType methods
-#' @exportMethod plot
-#' @aliases plot, TGST-method
-setGeneric(
-  "plot",
-  function(object) {
-    Z = object@Z
-    S = object@S
-    
-    #risk score distribution plot by disease status
-    dat=data.frame(Z=as.factor(Z), S=S)
-    #library(ggplot2)
-    fig = ggplot(dat, aes(x=S, fill=Z)) + geom_density(alpha=.3)+ scale_fill_discrete(name="Viral Failure",
-                                                                                breaks=c("0","1"),
-                                                                                labels=c("Z=0","Z=1"))
-    print(fig)
-  }
-)
-
-#'
 #' summary function.
 #' 
 #' This function gives the summary of the data from \code{TGST}.
@@ -114,6 +85,107 @@ setMethod(
     #output
     z = list(Percent_of_Viral_Failure=percF,SummaryS0=summ.S0,SummaryS1=summ.S1)
     return(z)
+  }
+)
+
+
+###################################################################################
+##' Constructor of Output class
+##'
+##' This class contains invisible results of OptimalRule function. 
+##'
+##' \describe{
+##'   \item{phi}{Percentage of patients taking viral load test.}
+##'   \item{Z}{A vector of true disease status (Viral failure coded as Z=1).}
+##'   \item{S}{A vector of risk Score.}
+##'   \item{Rules}{A matrix of all possible tripartite rules (two cutoffs) derived from the training data set.}
+##'   \item{Nonparametric}{A boolean indicating if nonparametric approach should be used in calculating the misclassfication rates. If FALSE, semiparametric approach would be used.}
+##'   \item{FNR.FPR}{A matrix with two columns of misclassification rates, FNR and FPR.}
+##'   \item{OptRule}{A numeric vector with two elements, the lower and upper cutoffs of the optimal tripartite rule.}
+##' }
+##'
+##' @details
+##' The Output class adds optimal rule to the TGST class.
+##'
+##'
+##' @name Output-class
+##' @rdname Output-class
+## @exportClass Output
+##'
+##'
+setClass(
+  Class="Output",
+  representation=representation(
+    phi="numeric",
+    Z="numeric",
+    S="numeric",
+    Rules="matrix",
+    Nonparametric="logical",
+    FNR.FPR="matrix",
+    OptRule="numeric"
+  ),
+  prototype=prototype(
+    phi=numeric(0),
+    Z=numeric(0),
+    S=numeric(0),
+    Rules=matrix(nrow=0,ncol=0),
+    Nonparametric=TRUE,
+    FNR.FPR=matrix(nrow=0,ncol=0),
+    OptRule=as.numeric(c(NA,NA))
+  )
+)
+
+
+#'
+#' plot function.
+#' 
+#' This function This function gives visualize object of class \code{TGST} or \code{Output}.
+#' 
+#' @param object Output object from \code{\link{TGST}} or \code{\link{Output}}.
+#' @return 
+#' Distribution plot.
+#' @name plot
+#' @rdname plot-methods
+#' @docType methods
+#' @import ggplot2
+#' @exportMethod plot
+#' @aliases plot plot, TGST-method, Output-method
+setMethod(
+  f="plot",
+  signature = "TGST",
+  definition = function(x,...) {
+    Z = x@Z
+    S = x@S
+    
+    #risk score distribution plot by disease status
+    dat=data.frame(Z=as.factor(Z), S=S)
+    library(ggplot2)
+    pl <- ggplot(dat, aes(x=S, fill=Z)) + geom_density(alpha=.3)+ scale_fill_discrete(name="Viral Failure",
+                                                                                      breaks=c("0","1"),
+                                                                                      labels=c("Z=0","Z=1"))
+    print(pl)
+  }
+)
+
+setMethod(
+  f="plot",
+  signature = "Output",
+  definition = function(x,...) {
+    Z = x@Z
+    S = x@S
+    S0 = S[Z==0]
+    S1 = S[Z==1]
+    #prevalence
+    percF = mean(Z,na.rm=TRUE)
+    
+    #risk score distribution plot by disease status
+    dat=data.frame(Z=as.factor(Z), S=S)
+    library(ggplot2)
+    xint = as.numeric(x@OptRule)
+    pl <- ggplot(dat, aes(x=S, fill=Z)) + geom_density(alpha=.3)+ scale_fill_discrete(name="Viral Failure",
+                                                                                      breaks=c("0","1"),
+                                                                                      labels=c("Z=0","Z=1"))
+    pl + geom_vline(xintercept = xint)
   }
 )
 

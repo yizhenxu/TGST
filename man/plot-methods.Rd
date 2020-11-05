@@ -4,17 +4,18 @@
 \name{plot}
 \alias{plot}
 \alias{plot,}
-\alias{TGST-method}
+\alias{TGST-method,}
+\alias{Output-method}
 \title{plot function.}
 \usage{
-plot(object)
+\S4method{plot}{TGST}(x, y, ...)
 }
 \arguments{
-\item{object}{Output object from \code{\link{TGST}}.}
+\item{object}{Output object from \code{\link{TGST}} or \code{\link{Output}}.}
 }
 \value{
 Distribution plot.
 }
 \description{
-This function gives the summary plot of the data from \code{TGST}.
+This function This function gives visualize object of class \code{TGST} or \code{Output}.
 }
