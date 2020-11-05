@@ -1,7 +1,7 @@
 #' ROC Analysis
 #'
 #' This function performs ROC analysis for tripartite rules. If \eqn{plot=TRUE}, the ROC curve is returned.
-#' @param Obj An object of class TVLT. 
+#' @param Obj An object of class TGST. 
 #' @param plot Logical parameter indicating if ROC curve should be plotted. Default is \code{plot=TRUE}. If false, then only AUC is calculated.
 #' @return 
 #' AUC (the area under ROC curve) and ROC curve.
@@ -13,7 +13,7 @@
 #' S = d$S # Risk Score
 #' phi = 0.1 #10% of patients taking viral load test
 #' lambda = 0.5
-#' Obj = TVLT(Z, S, phi, method="nonpar")
+#' Obj = TGST(Z, S, phi, method="nonpar")
 #' ROCAnalysis(Obj, plot=TRUE)
 
 

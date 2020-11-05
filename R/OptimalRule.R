@@ -1,8 +1,8 @@
 #' Optimal Tripartite Rule
 #'
-#' \code{OptimalRule} is the main function of \code{TVLT} and it gives you the optimal tripartite rule that minimizes the min-\eqn{\lambda} risk based on the type of user selected approach. 
+#' \code{OptimalRule} is the main function of \code{TGST} and it gives you the optimal tripartite rule that minimizes the min-\eqn{\lambda} risk based on the type of user selected approach. 
 #' The function takes the risk score and true disease status from a training data set and returns the optimal tripartite rule under the specified proportion of patients able to take VL test.
-#' @param Obj An object of class TVLT. 
+#' @param Obj An object of class TGST. 
 #' @param lambda A user-specified weight that reflects relative loss for the two types of misdiagnoses, taking value in \eqn{[0,1]}. \eqn{Loss=\lambda*I(FN)+(1-\lambda)*I(FP)}.
 #' @return 
 #' Optimal tripartite rule and its associated misclassification rates (FNR, FPR), optimal lambda risk, and total misclassification rate (TMR). 
@@ -14,7 +14,7 @@
 #' S = d$S # Risk Score
 #' phi = 0.1 #10% of patients taking viral load test
 #' lambda = 0.5
-#' Obj = TVLT(Z, S, phi, method="nonpar")
+#' Obj = TGST(Z, S, phi, method="nonpar")
 #' OptimalRule(Obj, lambda)
 
 

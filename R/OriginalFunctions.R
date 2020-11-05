@@ -13,10 +13,10 @@
 #' d = Simdata
 #' Z = d$Z # True Disease Status
 #' S = d$S # Risk Score
-#' TVLT.summ(Z,S)
+#' TGST.summ(Z,S)
 
 
-TVLT.summ = function(Z,S){
+TGST.summ = function(Z,S){
   S0 = S[Z==0]
   S1 = S[Z==1]
   #prevalence

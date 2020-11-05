@@ -1,5 +1,5 @@
 ###################################################################################
-##' Constructor of TVLT class
+##' Constructor of TGST class
 ##'
 ##' This class contains results of a run to search for all possible rules. 
 ##'
@@ -19,13 +19,13 @@
 ##' slot for each number of clusters.
 ##'
 ##'
-##' @name TVLT-class
-##' @rdname TVLT-class
-## @exportClass TVLT
+##' @name TGST-class
+##' @rdname TGST-class
+## @exportClass TGST
 ##'
 ##'
 setClass(
-  Class="TVLT",
+  Class="TGST",
   representation=representation(
     phi="numeric",
     Z="numeric",
@@ -48,9 +48,9 @@ setClass(
 #'
 #' summary function.
 #' 
-#' This function This function gives the summary of the data from \code{TVLT}.
+#' This function This function gives the summary of the data from \code{TGST}.
 #' 
-#' @param object Output object from \code{\link{TVLT}}.
+#' @param object Output object from \code{\link{TGST}}.
 #' @return 
 #' Percentage of treatment failure; 
 #' Summary statistics (mean, standard deviation, minimum, median, maximum and IQR) of risk score by true disease status; 
@@ -59,10 +59,10 @@ setClass(
 #' @rdname summary-methods
 #' @docType methods
 #' @exportMethod summary
-#' @aliases summary summary, TVLT-method
+#' @aliases summary summary, TGST-method
 setMethod(
   f="summary",
-  signature = "TVLT",
+  signature = "TGST",
   definition = function(object,...) {
     Z = object@Z
     S = object@S

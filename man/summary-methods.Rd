@@ -4,13 +4,13 @@
 \name{summary}
 \alias{summary}
 \alias{summary,}
-\alias{TVLT-method}
+\alias{TGST-method}
 \title{summary function.}
 \usage{
-\S4method{summary}{TVLT}(object, ...)
+\S4method{summary}{TGST}(object, ...)
 }
 \arguments{
-\item{object}{Output object from \code{\link{TVLT}}.}
+\item{object}{Output object from \code{\link{TGST}}.}
 }
 \value{
 Percentage of treatment failure; 
@@ -18,5 +18,5 @@ Summary statistics (mean, standard deviation, minimum, median, maximum and IQR) 
 Distribution plot.
 }
 \description{
-This function This function gives the summary of the data from \code{TVLT}.
+This function This function gives the summary of the data from \code{TGST}.
 }

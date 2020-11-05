@@ -17,9 +17,9 @@
 #' S = d$S # Risk Score
 #' phi = 0.1 #10% of patients taking viral load test
 #' lambda =0.5
-#' CV.TVLT(Z, S, phi, K = 10, method = "semipar", lambda)
+#' CV.TGST(Z, S, phi, K = 10, method = "semipar", lambda)
 
-CV.TVLT <- function(Z, S, phi, K = 10, method = "nonpar", lambda){
+CV.TGST <- function(Z, S, phi, K = 10, method = "nonpar", lambda){
   or.data <- cbind(Z,S)
   data <- or.data[complete.cases(or.data),]
   Z <- data[,1]
