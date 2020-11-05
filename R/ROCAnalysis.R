@@ -27,11 +27,18 @@ ROCAnalysis <- function(Obj,plot=TRUE){
   
   if(plot==TRUE){  
     #ROC curve
-    plot(fnr.fpr[,2],1-fnr.fpr[,1],type="l",xlab="FPR",ylab="TPR",main="ROC Curve")
-    legend('bottomright',paste("AUC=",round(auc,3),sep=" "),bty ="n",cex=0.8)
+    dat=data.frame(fnr.fpr[,2], 1-fnr.fpr[,1])
+    names(dat) <- c("FPR","TPR")
+    library(ggplot2)
+    x = min(dat$FPR)+3/4*(max(dat$FPR)-min(dat$FPR))
+    y = min(dat$TPR)+1/4*(max(dat$TPR)-min(dat$TPR))
+    
+    d <- ggplot(dat, aes(FPR,TPR)) +geom_ribbon(aes(ymin=min(TPR), ymax=TPR), fill="lightblue3", color="lightpink3")+geom_line(color="lightblue4", lwd=1)
+    d <- d+geom_text(aes(x,y, label = paste("AUC=",round(auc,3),sep=" ")))    
+    print(d)
   }
   Output = auc
   names(Output) = "AUC"
-  invisible(Output)  
+  return(Output) 
 }
 
