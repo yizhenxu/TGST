@@ -7,6 +7,7 @@
 #' @return 
 #' Plot of empirical density for risk score S, joint empirical density for (S,Z=1) and (S,Z=0), and the density under the exponential tilt model assumption for (S,Z=1) and (S,Z=0).
 #' @keywords Semiparametric, exponential tilt model.
+#' @import ggplot2
 #' @export
 #' @examples
 #' data = Simdata
@@ -22,32 +23,35 @@ Check.exp.tilt <- function(Z,S){
   S <- data[complete.cases(data),2]
   p <- mean(Z,na.rm=TRUE)
   fit <- glm(Z~ S, family=binomial)
+  
+  
   temp <- density(S) #marginal density (S)
-  o<-par("xpd", "mar") #save the original par setting
-  layout(rbind(1,2), heights=c(7,1))  # put legend on bottom 1/8th of the chart
-  #layout.show(2) #show layout
-  # setup margins for the main plot
-  par(mar=c(2,4,4,2)+0.1)
-  plot(temp, col="red",xlab="",main="Check Exp Tilt Model Assumption")#, xlim=c(0, 100), ylim=c(0, 0.0005))
+  vec <- data.frame(x=temp$x,y=temp$y,Lines=rep("S",length(temp$x)))
+  
   temp1 <- density(S[Z==1]) #conditional density (S|Z=1)
   temp1$y <- temp1$y*p #joint density (S,Z=1)
-  lines(temp1, col="blue") #plot empirical joint density (S,Z=1)
+  vec1 <- data.frame(x=temp1$x,y=temp1$y,Lines=rep("S,Z=1 Empirical",length(temp1$x)))
+  
   temp0 <- density(S[Z==0]) #conditional density (S|Z=0)
   temp0$y <- temp0$y*(1-p) #joint density (S,Z=0)
-  lines(temp0, col="green") #plot empirical joint density (S,Z=0)
+  vec0 <- data.frame(x=temp0$x,y=temp0$y,Lines=rep("S,Z=0 Empirical",length(temp0$x)))
+  
   beta0star <- fit$coef[1]-log(p/(1-p))
   t <- exp(beta0star+temp$x*fit$coef[2]) #g1=t*g0 under exp tilt assumption
   #by g = p*g1+(1-p)*g0 = [p*t+(1-p)]*g0 = [p+(1-p)/t]*g1
   #plot the joint density (S,Z=1), (S,Z=0) under exponential tilt model assumption
   g1 <- temp$y/(p+(1-p)/t)
   g0 <- temp$y/(p*t+1-p)
-  lines(temp$x, g1*p, lty=2, col="blue") #(S,Z=1)
-  lines(temp$x, g0*(1-p), lty=2, col="green") #(S,Z=0)
-  # setup for no margins on the legend
-  par(mar=c(0, 0, 0, 0))
-  # c(bottom, left, top, right)
-  plot.new()
-  legend('center','group',c("S,Z=1 Empirical","S,Z=1 Exp Tilt","S,Z=0 Empirical","S,Z=0 Exp Tilt","S"), lty = c(1,2,1,2,1),
-         col=c('blue','blue','green','green','red'),ncol=3,bty ="n",cex=0.8)
-  par(o) #back to original par setting
+  
+  vec1e <- data.frame(x=temp$x,y=g1*p,Lines=rep("S,Z=1 Exp Tilt",length(temp$x)))
+  vec0e <- data.frame(x=temp$x,y=g0*(1-p),Lines=rep("S,Z=0 Exp Tilt",length(temp$x)))
+  
+  dat <- rbind(vec,vec1,vec1e,vec0,vec0e)
+  colors <- c("red","blue","blue","green","green")
+  types <- c("solid","solid", "dashed","solid","dashed")
+  library(ggplot2)
+  ggplot(dat, aes(x=x, y=y, colour = Lines,group=Lines,linetype = Lines)) + ggtitle("Check Exponential Tilt Model Assumption") + 
+    geom_line() +
+    scale_colour_manual(values =colors ) +
+    scale_linetype_manual(values = types)
 }
