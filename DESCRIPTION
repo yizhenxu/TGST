@@ -1,5 +1,5 @@
 Package: TGST
-Title: Targeted Viral Load Testing
+Title: Targeted Gold Standard Testing
 Version: 1.0
 Authors@R: c(
     person("Yizhen", "Xu", role = c("aut", "cre"), email = "yizhen_xu@brown.edu"),

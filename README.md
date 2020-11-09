@@ -1,5 +1,5 @@
-# TVLT
-This is a package for targeted viral load testing.
+# TGST
+This is a package for targeted gold standard testing.
 
 See reference:
 
