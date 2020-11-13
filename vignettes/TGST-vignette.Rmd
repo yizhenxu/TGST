@@ -1,34 +1,34 @@
 ---
-title: "Package 'TVLT'"
-author: "Yizhen Xu, Tao Liu, Joseph Hogan"
+title: "Package 'TGST'"
+author: "Yizhen Xu, Tao Liu"
 date: "`r Sys.Date()`"
 output: 
   rmarkdown::html_vignette:
     toc: true
     toc_depth: 3
 vignette: >
-  %\VignetteIndexEntry{Targeted Viral Load Testing}
+  %\VignetteIndexEntry{Targeted Gold Standard Testing}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
 **Type** Package
 
-**Title** Targeted Viral Load Testing
+**Title** Targeted Gold Standard Testing
 
 **Version** 1.0
 
 **Date** "`r Sys.Date()`"
 
-**Authors** Yizhen Xu, Tao Liu, Joseph Hogan
+**Authors** Yizhen Xu, Tao Liu
 
-**Maintainer** Yizhen (yizhen_xu@brown.edu)
+**Maintainer** Yizhen (yizhen_xu@alumni.brown.edu)
 
-**Description** This package implements the optimal allocation of viral load testing under constrained availability.
+**Description** This package implements the optimal allocation of gold standard testing under constrained availability.
 
-**License** ???
+**License** GPL
 
-**URL**  https://github.com/yizhenxu/TVLT
+**URL**  https://github.com/yizhenxu/TGST
 
 **Depends** R (>= 3.2.0)
 
@@ -62,7 +62,7 @@ $$g_1(s) = exp(\beta_0^*+\beta_1*s)*g_0(s)$$
 
 ####Author(s)
 
-> Yizhen Xu (yizhen_xu@brown.edu), Tao Liu, Joseph Hogan
+> Yizhen Xu (yizhen_xu@alumni.brown.edu), Tao Liu, Joseph Hogan
 
 ####References
 
@@ -78,7 +78,7 @@ Check.exp.tilt( Z, S)
 ```
 _____
 
-###CV.TVLT
+###CV.TGST
 
 *Cross Validation*
 
@@ -88,17 +88,16 @@ _____
 
 ####Usage
 
-> CV.TVLT(Z, S, phi, K = 10, method = "semipar", lambda)
+> CV.TGST(Obj, lambda, K=10)
 
 
 ####Arguments
 
-> - **Z** &nbsp;&nbsp;&nbsp;&nbsp; True disease status (No disease / treatment success coded as Z=0, diseased / treatment failure coded as Z=1).
-> - **S**  &nbsp;&nbsp;&nbsp;&nbsp;  Risk score.
-> - **phi**  &nbsp;&nbsp;&nbsp;&nbsp;  Percentage of patients taking viral load test.
+> - **Obj** &nbsp;&nbsp;&nbsp;&nbsp; An object of class TGST. 
+> - **lambda** &nbsp;&nbsp;&nbsp;&nbsp; A user-specified weight that reflects relative loss for the two types of misdiagnoses, taking value in [0,1]. 
+$Loss=\lambda*I(FN)+(1-\lambda)*I(FP)$.
 > - **K**  &nbsp;&nbsp;&nbsp;&nbsp; Number of folds in cross validation. The default is 10.
-> - **method**  &nbsp;&nbsp;&nbsp;&nbsp; The method to be used. The default is "nonpar", which returns result using nonparametric method. Another possible value is "semipar", which returns result estimated by semiparametric method assuming exponential tilt.
-> - **lambda** &nbsp;&nbsp;&nbsp;&nbsp; A user-specified weight that reflects relative loss for the two types of misdiagnoses, taking value in [0,1]. $Loss=\lambda*I(FN)+(1-\lambda)*I(FP)$.
+
  
 ####Value
 
@@ -106,7 +105,7 @@ _____
 
 ####Author(s)
 
-> Yizhen Xu (yizhen_xu@brown.edu), Tao Liu, Joseph Hogan
+> Yizhen Xu (yizhen_xu@alumni.brown.edu), Tao Liu, Joseph Hogan
 
 ####References
 
@@ -115,89 +114,41 @@ _____
 ####Examples
 
 ```{r,eval=FALSE}
-d = Simdata
+data = Simdata
 Z = d$Z # True Disease Status
 S = d$S # Risk Score
-phi = 0.1 #10\% of patients taking viral load test
-lambda =0.5
-CV.TVLT(Z, S, phi, K = 10, method = "semipar", lambda)
-```
-
-
-_____
-
-###Opt.nonpar.rule
-
-*Optimal Nonparametric Rule*
-
-####Description
-
-> This function gives you the optimal nonparametric tripartite rule that minimizes the min $\lambda$ rules.
-
-####Usage
-
-> Opt.nonpar.rule( Z, S, phi, lambda)
-
-
-####Arguments
-
-> - **Z** &nbsp;&nbsp;&nbsp;&nbsp; True disease status (No disease / treatment success coded as Z=0, diseased / treatment failure coded as Z=1).
-> - **S**  &nbsp;&nbsp;&nbsp;&nbsp;  Risk score.
-> - **phi**  &nbsp;&nbsp;&nbsp;&nbsp;  Percentage of patients taking viral load test.
-> - **lambda** &nbsp;&nbsp;&nbsp;&nbsp; A user-specified weight that reflects relative loss for the two types of misdiagnoses, taking value in [0,1]. $Loss=\lambda*I(FN)+(1-\lambda)*I(FP)$.
- 
-####Value
-
-> Optimal nonparametric rule and its associated misclassification rates (FNR, FPR), optimal lambda risk, and total misclassification rate (TMR). 
-
-####Author(s)
-
-> Yizhen Xu (yizhen_xu@brown.edu), Tao Liu, Joseph Hogan
-
-####References
-
-> T. Liu, J. Hogan, L. Wang, S. Zhang, R. Kantor (2013) *Journal of the American Statistical Association* Vol.108, No.504
-
-####Examples
-
-```{r,eval=FALSE}
-d = Simdata
-Z = d$Z # True Disease Status
-S = d$S # Risk Score
-phi = 0.1 #10\% of patients taking viral load test
-lambda = 0.5
-Opt.nonpar.rule( Z, S, phi, lambda)
+phi = 0.1 #10% of patients taking viral load test
+Obj = TVLT(Z, S, phi, method="nonpar")
+CV.TGST(Obj, lambda, K=10)
 ```
 
 _____
 
-###Opt.semipar.rule
+###OptimalRule
 
-*Optimal Semiparametric Rule*
+*Optimal Tripartite Rule*
 
-####Description
+###Description
 
-> This function gives you the optimal semiparametric tripartite rule that minimizes the min $\lambda$ rules.
+> This function gives you the optimal tripartite rule that minimizes the min-$\lambda$ risk based on the type of user selected approach. It takes the risk score and true disease status from a training data set and returns the optimal tripartite rule under the specified proportion of patients able to take gold standard test.
 
 ####Usage
 
-> Opt.semipar.rule( Z, S, phi, lambda)
-
+> OptimalRule(Obj, lambda)
 
 ####Arguments
 
-> - **Z** &nbsp;&nbsp;&nbsp;&nbsp; True disease status (No disease / treatment success coded as Z=0, diseased / treatment failure coded as Z=1).
-> - **S**  &nbsp;&nbsp;&nbsp;&nbsp;  Risk score.
-> - **phi**  &nbsp;&nbsp;&nbsp;&nbsp;  Percentage of patients taking viral load test.
+> - **Z** &nbsp;&nbsp;&nbsp;&nbsp;
+> - **Obj** &nbsp;&nbsp;&nbsp;&nbsp; An object of class TGST. 
 > - **lambda** &nbsp;&nbsp;&nbsp;&nbsp; A user-specified weight that reflects relative loss for the two types of misdiagnoses, taking value in [0,1]. $Loss=\lambda*I(FN)+(1-\lambda)*I(FP)$.
- 
+
 ####Value
 
-> Optimal semiparametric rule and its associated misclassification rates (FNR, FPR), optimal lambda risk, and total misclassification rate (TMR). 
+> Optimal tripartite rule.  
 
 ####Author(s)
 
-> Yizhen Xu (yizhen_xu@brown.edu), Tao Liu, Joseph Hogan
+> Yizhen Xu (yizhen_xu@alumni.brown.edu), Tao Liu, Joseph Hogan
 
 ####References
 
@@ -211,37 +162,36 @@ Z = d$Z # True Disease Status
 S = d$S # Risk Score
 phi = 0.1 #10% of patients taking viral load test
 lambda = 0.5
-Opt.semipar.rule( Z, S, phi, lambda)
+Obj = TGST(Z, S, phi, method="nonpar")
+OptimalRule(Obj, lambda)
 ```
+
 _____
 
-###ROC.nonpar
+###ROCAnalysis
 
-*Nonparametric ROC Analysis*
+*ROC Analysis*
 
 ####Description
 
-> This function performs ROC analysis for tripartite rules by nonparametric approach. If 'plot=TRUE', the ROC curve is returned.
+> This function performs ROC analysis for tripartite rules. If 'plot=TRUE', the ROC curve is returned.
 
 ####Usage
 
-> ROC.nonpar( Z, S, phi,plot=TRUE)
+> ROCAnalysis(Obj, plot=TRUE)
 
 ####Arguments
 
-> - **Z** &nbsp;&nbsp;&nbsp;&nbsp; True disease status (No disease / treatment success coded as Z=0, diseased / treatment failure coded as Z=1).
-> - **S**  &nbsp;&nbsp;&nbsp;&nbsp;  Risk score.
-> - **phi**  &nbsp;&nbsp;&nbsp;&nbsp;  Percentage of patients taking viral load test.
- 
+> - **Obj** &nbsp;&nbsp;&nbsp;&nbsp; An object of class TGST.
+> - **plot**  &nbsp;&nbsp;&nbsp;&nbsp;  Logical parameter indicating if ROC curve should be plotted. Default is 'plot=TRUE'. If false, then only AUC is calculated.
+
 ####Value
 
-> - **AUC**   &nbsp;&nbsp;&nbsp;&nbsp; The area under the ROC curve.
-> - **FNR**   &nbsp;&nbsp;&nbsp;&nbsp; Misdiagnoses rate for viral failure (false negative rate).
-> - **FPR**  &nbsp;&nbsp;&nbsp;&nbsp; Misdiagnoses rate for treatment failure (false positive rate).
+AUC (the area under ROC curve) and ROC curve.
  
 ####Author(s)
 
-Yizhen Xu (yizhen_xu@brown.edu), Tao Liu, Joseph Hogan
+Yizhen Xu (yizhen_xu@alumni.brown.edu), Tao Liu, Joseph Hogan
 
 ####References
 
@@ -254,56 +204,9 @@ d = Simdata
 Z = d$Z # True Disease Status
 S = d$S # Risk Score
 phi = 0.1 #10% of patients taking viral load test
-a = ROC.nonpar( Z, S, phi,plot=TRUE)
-a$AUC
-a$FNR
-a$FPR
-```
-_____
-
-###ROC.semipar
-
-*Semiparametric ROC Analysis*
-
-####Description 
-
-> This function performs ROC analysis for tripartite rules by semiparametric approach. If 'plot=TRUE', the ROC curve is returned.
-
-####Usage
-
-> ROC.semipar( Z, S, phi,plot=TRUE)
-
-####Arguments
-
-> - **Z** &nbsp;&nbsp;&nbsp;&nbsp; True disease status (No disease / treatment success coded as Z=0, diseased / treatment failure coded as Z=1).
-> - **S**  &nbsp;&nbsp;&nbsp;&nbsp;  Risk score.
-> - **phi**  &nbsp;&nbsp;&nbsp;&nbsp;  Percentage of patients taking viral load test.
- 
-####Value
-
-> - **AUC**   &nbsp;&nbsp;&nbsp;&nbsp; The area under the ROC curve.
-> - **FNR**   &nbsp;&nbsp;&nbsp;&nbsp; Misdiagnoses rate for viral failure (false negative rate).
-> - **FPR**  &nbsp;&nbsp;&nbsp;&nbsp; Misdiagnoses rate for treatment failure (false positive rate).
- 
-####Author(s)
-
-Yizhen Xu (yizhen_xu@brown.edu), Tao Liu, Joseph Hogan
-
-####References
-
-> T. Liu, J. Hogan, L. Wang, S. Zhang, R. Kantor (2013) *Journal of the American Statistical Association* Vol.108, No.504
-
-####Examples
-
-```{r,eval=FALSE}
-d = Simdata
-Z = d$Z # True Disease Status
-S = d$S # Risk Score
-phi = 0.1 #10% of patients taking viral load test
-a = ROC.semipar( Z, S, phi,plot=TRUE)
-a$AUC
-a$FNR
-a$FPR
+lambda = 0.5
+Obj = TGST(Z, S, phi, method="nonpar")
+ROCAnalysis(Obj, plot=TRUE)
 ```
 
 _____
@@ -428,7 +331,7 @@ plot(Simdata)
 ```
 _____
 
-###TVLT.summ
+###TGST.summ
 
 *Summary of Disease Status and Risk Score*
 
@@ -438,7 +341,7 @@ _____
 
 ####Usage
 
-> TVLT.summ(Z,S)
+> TGST.summ(Z,S)
 
 ####Arguments
 
@@ -464,5 +367,5 @@ _____
 d = Simdata
 Z = d$Z # True Disease Status
 S = d$S # Risk Score
-TVLT.summ(Z,S)
+TGST.summ(Z,S)
 ```

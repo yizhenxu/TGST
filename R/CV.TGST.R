@@ -5,7 +5,6 @@
 #' @param Obj An object of class TGST. 
 #' @param lambda A user-specified weight that reflects relative loss for the two types of misdiagnoses, taking value in \eqn{[0,1]}. \eqn{Loss=\lambda*I(FN)+(1-\lambda)*I(FP)}.
 #' @param K Number of folds in cross validation. The default is 10.
-#' @param method The method to be used. The default is "nonpar", which returns result using nonparametric method. Another possible value is "semipar", which returns result estimated by semiparametric method assuming exponential tilt.
 #' @return  Cross-validation results.
 #' @keywords Cross validation, optimal risk, FNR, FPR.
 #' @export
