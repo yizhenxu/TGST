@@ -33,7 +33,13 @@ ROCAnalysis <- function(Obj,plot=TRUE){
     x = min(dat$FPR)+3/4*(max(dat$FPR)-min(dat$FPR))
     y = min(dat$TPR)+1/4*(max(dat$TPR)-min(dat$TPR))
     
-    d <- ggplot(dat, aes(FPR,TPR)) +geom_ribbon(aes(ymin=min(TPR), ymax=TPR), fill="lightblue3", color="lightpink3")+geom_line(color="lightblue4", lwd=1)
+    
+    dat.add = rbind(c(0,0), dat, c(1,1))
+    d <- ggplot(dat.add, aes(FPR,TPR)) +
+         geom_line(color="lightblue4", lwd=1) + 
+         ylim(0,1)
+    
+    #d <- ggplot(dat, aes(FPR,TPR)) +geom_ribbon(aes(ymin=0, ymax=TPR), fill="lightblue3", color="lightpink3")+geom_line(color="lightblue4", lwd=1)
     d <- d+geom_text(aes(x,y, label = paste("AUC=",round(auc,3),sep=" ")))    
     print(d)
   }
