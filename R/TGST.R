@@ -1,12 +1,12 @@
 #' Create a TGST Object
 #'
 #' Create a TGST object, usually used as an input for optimal rule search and ROC analysis. 
-#' @param Z A vector of true disease status (Viral failure coded as Z=1).
+#' @param Z A vector of true disease status (No disease / treatment success coded as Z=0, diseased / treatment failure coded as Z=1).
 #' @param S A vector of risk Score.
-#' @param phi Percentage of patients taking viral load test. 
+#' @param phi Percentage of patients taking gold standard test. 
 #' @param method Method for searching for the optimal tripartite rule, options are "nonpar" (default) and "semipar".
 #' @return 
-#' An object of class \code{TGST}.The class contains 6 slots: phi (percentage of VL tests), Z (true viral failure status), S (risk score), Rules (all possible tripartite rules), Nonparametric (logical indicator of the approach), and FNR.FPR (miclassification rates).
+#' An object of class \code{TGST}.The class contains 6 slots: phi (percentage of gold standard tests), Z (true failure status), S (risk score), Rules (all possible tripartite rules), Nonparametric (logical indicator of the approach), and FNR.FPR (miclassification rates).
 #' @keywords Tripartite rules, FNR, FPR.
 #' @export
 #' @examples
