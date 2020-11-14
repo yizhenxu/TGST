@@ -5,7 +5,7 @@
 ##'
 ##' \describe{
 ##'   \item{phi}{Percentage of patients taking viral load test.}
-##'   \item{Z}{A vector of true disease status (Viral failure coded as Z=1).}
+##'   \item{Z}{A vector of true disease status (Failure Status coded as Z=1).}
 ##'   \item{S}{A vector of risk Score.}
 ##'   \item{Rules}{A matrix of all possible tripartite rules (two cutoffs) derived from the training data set.}
 ##'   \item{Nonparametric}{A boolean indicating if nonparametric approach should be used in calculating the misclassfication rates. If FALSE, semiparametric approach would be used.}
@@ -78,7 +78,7 @@ setMethod(
     #risk score distribution plot by disease status
     dat=data.frame(Z=as.factor(Z), S=S)
     #library(ggplot2)
-    fig = ggplot(dat, aes(x=S, fill=Z)) + geom_density(alpha=.3)+ scale_fill_discrete(name="Viral Failure",
+    fig = ggplot(dat, aes(x=S, fill=Z)) + geom_density(alpha=.3)+ scale_fill_discrete(name="Failure Status",
                                                                                       breaks=c("0","1"),
                                                                                       labels=c("Z=0","Z=1"))
     print(fig)
@@ -96,7 +96,7 @@ setMethod(
 ##'
 ##' \describe{
 ##'   \item{phi}{Percentage of patients taking viral load test.}
-##'   \item{Z}{A vector of true disease status (Viral failure coded as Z=1).}
+##'   \item{Z}{A vector of true disease status (Failure Status coded as Z=1).}
 ##'   \item{S}{A vector of risk Score.}
 ##'   \item{Rules}{A matrix of all possible tripartite rules (two cutoffs) derived from the training data set.}
 ##'   \item{Nonparametric}{A boolean indicating if nonparametric approach should be used in calculating the misclassfication rates. If FALSE, semiparametric approach would be used.}
@@ -160,7 +160,7 @@ setMethod(
     #risk score distribution plot by disease status
     dat=data.frame(Z=as.factor(Z), S=S)
     library(ggplot2)
-    pl <- ggplot(dat, aes(x=S, fill=Z)) + geom_density(alpha=.3)+ scale_fill_discrete(name="Viral Failure",
+    pl <- ggplot(dat, aes(x=S, fill=Z)) + geom_density(alpha=.3)+ scale_fill_discrete(name="Failure Status",
                                                                                       breaks=c("0","1"),
                                                                                       labels=c("Z=0","Z=1"))
     print(pl)
@@ -182,7 +182,7 @@ setMethod(
     dat=data.frame(Z=as.factor(Z), S=S)
     library(ggplot2)
     xint = as.numeric(x@OptRule)
-    pl <- ggplot(dat, aes(x=S, fill=Z)) + geom_density(alpha=.3)+ scale_fill_discrete(name="Viral Failure",
+    pl <- ggplot(dat, aes(x=S, fill=Z)) + geom_density(alpha=.3)+ scale_fill_discrete(name="Failure Status",
                                                                                       breaks=c("0","1"),
                                                                                       labels=c("Z=0","Z=1"))
     pl + geom_vline(xintercept = xint)
