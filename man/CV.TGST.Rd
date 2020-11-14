@@ -12,8 +12,6 @@ CV.TGST(Obj, lambda, K = 10)
 \item{lambda}{A user-specified weight that reflects relative loss for the two types of misdiagnoses, taking value in \eqn{[0,1]}. \eqn{Loss=\lambda*I(FN)+(1-\lambda)*I(FP)}.}
 
 \item{K}{Number of folds in cross validation. The default is 10.}
-
-\item{method}{The method to be used. The default is "nonpar", which returns result using nonparametric method. Another possible value is "semipar", which returns result estimated by semiparametric method assuming exponential tilt.}
 }
 \value{
 Cross-validation results.

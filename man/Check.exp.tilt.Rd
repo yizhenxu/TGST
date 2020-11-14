@@ -16,7 +16,7 @@ Plot of empirical density for risk score S, joint empirical density for (S,Z=1) 
 }
 \description{
 This function provides graphical assessment to the suitability of the exponential tilt model for risk score in finding optimal tripartite rules by semiparametric approach. 
-\deqn{g1(s)=exp(\tilde{\beta0}+\beta1*s)*g0(s)}
+\deqn{g1(s)=exp(\tilde{\beta}_{0}+\beta_{1}*s)*g0(s)}
 }
 \examples{
 data = Simdata

@@ -10,7 +10,7 @@ This class contains results of a run to search for all possible rules.
 \details{
 \describe{
   \item{phi}{Percentage of patients taking viral load test.}
-  \item{Z}{A vector of true disease status (Viral failure coded as Z=1).}
+  \item{Z}{A vector of true disease status (Failure Status coded as Z=1).}
   \item{S}{A vector of risk Score.}
   \item{Rules}{A matrix of all possible tripartite rules (two cutoffs) derived from the training data set.}
   \item{Nonparametric}{A boolean indicating if nonparametric approach should be used in calculating the misclassfication rates. If FALSE, semiparametric approach would be used.}
