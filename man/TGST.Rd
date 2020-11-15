@@ -7,16 +7,16 @@
 TGST(Z, S, phi, method = "nonpar")
 }
 \arguments{
-\item{Z}{A vector of true disease status (Viral failure coded as Z=1).}
+\item{Z}{A vector of true disease status (No disease / treatment success coded as Z=0, diseased / treatment failure coded as Z=1).}
 
 \item{S}{A vector of risk Score.}
 
-\item{phi}{Percentage of patients taking viral load test.}
+\item{phi}{Percentage of patients taking gold standard test.}
 
 \item{method}{Method for searching for the optimal tripartite rule, options are "nonpar" (default) and "semipar".}
 }
 \value{
-An object of class \code{TGST}.The class contains 6 slots: phi (percentage of VL tests), Z (true viral failure status), S (risk score), Rules (all possible tripartite rules), Nonparametric (logical indicator of the approach), and FNR.FPR (miclassification rates).
+An object of class \code{TGST}.The class contains 6 slots: phi (percentage of gold standard tests), Z (true failure status), S (risk score), Rules (all possible tripartite rules), Nonparametric (logical indicator of the approach), and FNR.FPR (miclassification rates).
 }
 \description{
 Create a TGST object, usually used as an input for optimal rule search and ROC analysis.

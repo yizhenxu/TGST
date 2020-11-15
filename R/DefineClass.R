@@ -78,9 +78,8 @@ setMethod(
     #risk score distribution plot by disease status
     dat=data.frame(Z=as.factor(Z), S=S)
     #library(ggplot2)
-    fig = ggplot(dat, aes(x=S, fill=Z)) + geom_density(alpha=.3)+ scale_fill_discrete(name="Failure Status",
-                                                                                      breaks=c("0","1"),
-                                                                                      labels=c("Z=0","Z=1"))
+    fig = ggplot(dat, aes(x=S,fill=Z)) + geom_density(alpha=.3)+ scale_fill_manual(name="Failure Status",values = c("1"="#FC4E07","0"="#00AFBB"), labels=c("0"="Z=0","1"="Z=1"))
+    
     print(fig)
     #output
     z = list(Percent_of_Viral_Failure=percF,SummaryS0=summ.S0,SummaryS1=summ.S1)
@@ -160,9 +159,10 @@ setMethod(
     #risk score distribution plot by disease status
     dat=data.frame(Z=as.factor(Z), S=S)
     library(ggplot2)
-    pl <- ggplot(dat, aes(x=S, fill=Z)) + geom_density(alpha=.3)+ scale_fill_discrete(name="Failure Status",
-                                                                                      breaks=c("0","1"),
-                                                                                      labels=c("Z=0","Z=1"))
+    #pl <- ggplot(dat, aes(x=S,fill=Z)) +scale_fill_brewer(palette="Dark2")+ geom_density(alpha=.3)+ 
+    #      scale_fill_discrete(name="Failure Status", breaks=c("0","1"), labels=c("Z=0","Z=1"))
+    pl <- ggplot(dat, aes(x=S,fill=Z)) + geom_density(alpha=.3)+ scale_fill_manual(name="Failure Status",values = c("1"="#FC4E07","0"="#00AFBB"), labels=c("0"="Z=0","1"="Z=1"))
+      
     print(pl)
   }
 )
@@ -182,9 +182,8 @@ setMethod(
     dat=data.frame(Z=as.factor(Z), S=S)
     library(ggplot2)
     xint = as.numeric(x@OptRule)
-    pl <- ggplot(dat, aes(x=S, fill=Z)) + geom_density(alpha=.3)+ scale_fill_discrete(name="Failure Status",
-                                                                                      breaks=c("0","1"),
-                                                                                      labels=c("Z=0","Z=1"))
+    pl <- ggplot(dat, aes(x=S,fill=Z)) + geom_density(alpha=.3)+ scale_fill_manual(name="Failure Status",values = c("1"="#FC4E07","0"="#00AFBB"), labels=c("0"="Z=0","1"="Z=1"))
+    
     pl + geom_vline(xintercept = xint)
   }
 )
