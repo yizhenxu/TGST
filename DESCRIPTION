@@ -9,7 +9,7 @@ Description: Targeted viral load testing. Paper "Optimal Allocation of Gold Stan
 Depends: R (>= 3.2.0)
 License: GPL
 LazyData: true
-Suggests: knitr
+Suggests: markdown
 VignetteBuilder: knitr
 Imports: ggplot2, methods
 RoxygenNote: 7.1.0
