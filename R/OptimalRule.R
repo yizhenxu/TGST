@@ -7,6 +7,7 @@
 #' @return 
 #' Optimal tripartite rule. 
 #' @keywords Optimal tripartite rules, optimal lambda risk.
+#' @import methods
 #' @export
 #' @examples
 #' d = Simdata

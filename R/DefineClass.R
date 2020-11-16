@@ -44,7 +44,6 @@ setClass(
   )
 )
 
-#'
 #' summary function.
 #' 
 #' This function gives the summary of the data from \code{TGST}.
@@ -58,7 +57,7 @@ setClass(
 #' @rdname summary-methods
 #' @docType methods
 #' @exportMethod summary
-#' @aliases summary, TGST-method
+#' @aliases summary,TGST-method
 setMethod(
   f="summary",
   signature(object = "TGST"),
@@ -77,8 +76,10 @@ setMethod(
     
     #risk score distribution plot by disease status
     dat=data.frame(Z=as.factor(Z), S=S)
-    #library(ggplot2)
-    fig = ggplot(dat, aes(x=S,fill=Z)) + geom_density(alpha=.3)+ scale_fill_manual(name="Failure Status",values = c("1"="#FC4E07","0"="#00AFBB"), labels=c("0"="Z=0","1"="Z=1"))
+    
+    fig = ggplot2::ggplot(dat, ggplot2::aes(x=S,fill=Z)) + 
+      ggplot2::geom_density(alpha=.3)+ 
+      ggplot2::scale_fill_manual(name="Failure Status",values = c("1"="#FC4E07","0"="#00AFBB"), labels=c("0"="Z=0","1"="Z=1"))
     
     print(fig)
     #output
@@ -135,12 +136,11 @@ setClass(
 )
 
 
-#'
 #' plot function.
 #' 
 #' This function This function gives visualize object of class \code{TGST} or \code{Output}.
 #' 
-#' @param object Output object from \code{\link{TGST}} or \code{\link{Output}}.
+#' @param x Output object from \code{\link[=TGST-class]{TGST}} or \code{\link[=Output-class]{Output}}.
 #' @return 
 #' Distribution plot.
 #' @name plot
@@ -148,29 +148,44 @@ setClass(
 #' @docType methods
 #' @import ggplot2
 #' @exportMethod plot
-#' @aliases plot plot, TGST-method, Output-method
+#' @aliases plot,TGST-method
 setMethod(
   f="plot",
   signature = "TGST",
-  definition = function(x,...) {
+  definition = function(x) {
     Z = x@Z
     S = x@S
     
     #risk score distribution plot by disease status
     dat=data.frame(Z=as.factor(Z), S=S)
-    library(ggplot2)
+    
     #pl <- ggplot(dat, aes(x=S,fill=Z)) +scale_fill_brewer(palette="Dark2")+ geom_density(alpha=.3)+ 
     #      scale_fill_discrete(name="Failure Status", breaks=c("0","1"), labels=c("Z=0","Z=1"))
-    pl <- ggplot(dat, aes(x=S,fill=Z)) + geom_density(alpha=.3)+ scale_fill_manual(name="Failure Status",values = c("1"="#FC4E07","0"="#00AFBB"), labels=c("0"="Z=0","1"="Z=1"))
+    pl <- ggplot2::ggplot(dat, aes(x=S,fill=Z)) + 
+      ggplot2::geom_density(alpha=.3)+ 
+      ggplot2::scale_fill_manual(name="Failure Status",values = c("1"="#FC4E07","0"="#00AFBB"), labels=c("0"="Z=0","1"="Z=1"))
       
     print(pl)
   }
 )
 
+#' plot function.
+#' 
+#' This function This function gives visualize object of class \code{TGST} or \code{Output}.
+#' 
+#' @param x Output object from \code{\link[=TGST-class]{TGST}} or \code{\link[=Output-class]{Output}}.
+#' @return 
+#' Distribution plot.
+#' @name plot
+#' @rdname plot-methods
+#' @docType methods
+#' @import ggplot2
+#' @exportMethod plot
+#' @aliases plot,Output-method
 setMethod(
   f="plot",
   signature = "Output",
-  definition = function(x,...) {
+  definition = function(x) {
     Z = x@Z
     S = x@S
     S0 = S[Z==0]
@@ -180,9 +195,11 @@ setMethod(
     
     #risk score distribution plot by disease status
     dat=data.frame(Z=as.factor(Z), S=S)
-    library(ggplot2)
+
     xint = as.numeric(x@OptRule)
-    pl <- ggplot(dat, aes(x=S,fill=Z)) + geom_density(alpha=.3)+ scale_fill_manual(name="Failure Status",values = c("1"="#FC4E07","0"="#00AFBB"), labels=c("0"="Z=0","1"="Z=1"))
+    pl <- ggplot2::ggplot(dat, aes(x=S,fill=Z)) + 
+      ggplot2::geom_density(alpha=.3)+ 
+      ggplot2::scale_fill_manual(name="Failure Status",values = c("1"="#FC4E07","0"="#00AFBB"), labels=c("0"="Z=0","1"="Z=1"))
     
     pl + geom_vline(xintercept = xint)
   }

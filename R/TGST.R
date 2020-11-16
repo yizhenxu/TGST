@@ -8,6 +8,7 @@
 #' @return 
 #' An object of class \code{TGST}.The class contains 6 slots: phi (percentage of gold standard tests), Z (true failure status), S (risk score), Rules (all possible tripartite rules), Nonparametric (logical indicator of the approach), and FNR.FPR (miclassification rates).
 #' @keywords Tripartite rules, FNR, FPR.
+#' @import methods
 #' @export
 #' @examples
 #' d = Simdata

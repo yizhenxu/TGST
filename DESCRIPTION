@@ -11,5 +11,5 @@ License: GPL
 LazyData: true
 Suggests: knitr
 VignetteBuilder: knitr
-Imports: ggplot2
+Imports: ggplot2, methods
 RoxygenNote: 7.1.0

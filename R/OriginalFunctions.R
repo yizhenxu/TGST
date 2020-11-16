@@ -8,6 +8,7 @@
 #' Summary statistics (mean, standard deviation, minimum, median, maximum and IQR) of risk score by true disease status; 
 #' Distribution plot.
 #' @keywords Prevalence of disease (treatment failure), risk score summary, risk score distribution.
+#' @import graphics
 #' @export
 #' @examples
 #' d = Simdata
@@ -136,6 +137,7 @@ Opt.semipar.rule <- function(Z,S,phi,lambda){
 #' FNR Misdiagnoses rate for viral failure (false negative rate).
 #' FPR Misdiagnoses rate for treatment failure (false positive rate).
 #' @keywords Nonparametric, ROC, AUC, FNR, FPR.
+#' @import graphics
 #' @export
 #' @examples
 #' d = Simdata
@@ -153,15 +155,16 @@ ROC.nonpar <- function(Z,S,phi,plot=TRUE){
   data <- cbind(Z,S)
   Z <- data[complete.cases(data),1]
   S <- data[complete.cases(data),2]
-  rules <- Rules.set(Z,S,phi)
+  rules <- nonpar.rules(Z,S,phi)
   
   auc = cal.AUC(Z,S,rules[,1],rules[,2])
+  fnrfpr = nonpar.fnr.fpr(Z,S,rules[,1],rules[,2])
   if(plot==TRUE){  
     #ROC curve
-    plot(rules[,4],1-rules[,3],type="l",xlab="FPR",ylab="TPR",main="ROC Curve")
+    plot(fnrfpr[,2],1-fnrfpr[,1],type="l",xlab="FPR",ylab="TPR",main="ROC Curve")
     legend('bottomright',paste("AUC=",round(auc,3),sep=" "),bty ="n",cex=0.8)
   }
-  outpt = list(AUC=auc, FNR=rules[,3], FPR=rules[,4])
+  outpt = list(AUC=auc, FNR=fnrfpr[,1], FPR=fnrfpr[,2])
   invisible(outpt)
 }
 
@@ -181,6 +184,7 @@ ROC.nonpar <- function(Z,S,phi,plot=TRUE){
 #' FNR Misdiagnoses rate for viral failure (false negative rate).
 #' FPR Misdiagnoses rate for treatment failure (false positive rate).
 #' @keywords Nonparametric, ROC, AUC, FNR, FPR.
+#' @import graphics
 #' @export
 #' @examples
 #' d = Simdata

@@ -9,16 +9,18 @@
 #' @keywords Cross validation, optimal risk, FNR, FPR.
 #' @export
 #' @examples
-#' data = Simdata
+#' d = Simdata
 #' Z = d$Z # True Disease Status
 #' S = d$S # Risk Score
 #' phi = 0.1 #10% of patients taking viral load test
-#' Obj = TVLT(Z, S, phi, method="nonpar")
+#' Obj = TGST(Z, S, phi, method="nonpar")
+#' lambda = 0.8
 #' CV.TGST(Obj, lambda, K=10)
 
 CV.TGST <- function(Obj, lambda, K = 10){
   Z <- Obj@Z
   S <- Obj@S
+  phi <- Obj@phi
   data <- cbind(Z,S)
   n <- length(Z)
   n.sub <- floor(n/K)

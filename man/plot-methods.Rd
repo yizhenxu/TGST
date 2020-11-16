@@ -3,19 +3,24 @@
 \docType{methods}
 \name{plot}
 \alias{plot}
-\alias{plot,}
-\alias{TGST-method,}
-\alias{Output-method}
+\alias{plot,TGST-method}
+\alias{plot,Output-method}
 \title{plot function.}
 \usage{
-\S4method{plot}{TGST}(x, y, ...)
+\S4method{plot}{TGST}(x)
+
+\S4method{plot}{Output}(x)
 }
 \arguments{
-\item{object}{Output object from \code{\link{TGST}} or \code{\link{Output}}.}
+\item{x}{Output object from \code{\link[=TGST-class]{TGST}} or \code{\link[=Output-class]{Output}}.}
 }
 \value{
 Distribution plot.
+
+Distribution plot.
 }
 \description{
+This function This function gives visualize object of class \code{TGST} or \code{Output}.
+
 This function This function gives visualize object of class \code{TGST} or \code{Output}.
 }

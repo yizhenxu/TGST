@@ -19,7 +19,7 @@ This function provides graphical assessment to the suitability of the exponentia
 \deqn{g1(s)=exp(\tilde{\beta}_{0}+\beta_{1}*s)*g0(s)}
 }
 \examples{
-data = Simdata
+d = Simdata
 Z = d$Z # True Disease Status
 S = d$S # Risk Score
 Check.exp.tilt( Z, S)

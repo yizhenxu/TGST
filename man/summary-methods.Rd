@@ -3,8 +3,7 @@
 \docType{methods}
 \name{summary}
 \alias{summary}
-\alias{summary,}
-\alias{TGST-method}
+\alias{summary,TGST-method}
 \title{summary function.}
 \usage{
 \S4method{summary}{TGST}(object)

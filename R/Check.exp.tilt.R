@@ -7,10 +7,10 @@
 #' @return 
 #' Plot of empirical density for risk score S, joint empirical density for (S,Z=1) and (S,Z=0), and the density under the exponential tilt model assumption for (S,Z=1) and (S,Z=0).
 #' @keywords Semiparametric, exponential tilt model.
-#' @import ggplot2
+#' @import ggplot2 stats graphics
 #' @export
 #' @examples
-#' data = Simdata
+#' d = Simdata
 #' Z = d$Z # True Disease Status
 #' S = d$S # Risk Score
 #' Check.exp.tilt( Z, S)
@@ -49,9 +49,9 @@ Check.exp.tilt <- function(Z,S){
   dat <- rbind(vec,vec1,vec1e,vec0,vec0e)
   colors <- c("red","blue","blue","green","green")
   types <- c("solid","solid", "dashed","solid","dashed")
-  library(ggplot2)
-  ggplot(dat, aes(x=x, y=y, colour = Lines,group=Lines,linetype = Lines)) + ggtitle("Check Exponential Tilt Model Assumption") + 
-    geom_line() +
-    scale_colour_manual(values =colors ) +
-    scale_linetype_manual(values = types)
+
+  ggplot2::ggplot(dat, ggplot2::aes(x=dat$x, y=dat$y, colour = dat$Lines,group=dat$Lines,linetype = dat$Lines)) + ggplot2::ggtitle("Check Exponential Tilt Model Assumption") + 
+    ggplot2::geom_line() +
+    ggplot2::scale_colour_manual(values =colors ) +
+    ggplot2::scale_linetype_manual(values = types)
 }
