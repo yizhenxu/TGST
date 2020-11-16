@@ -16,7 +16,7 @@ TGST(Z, S, phi, method = "nonpar")
 \item{method}{Method for searching for the optimal tripartite rule, options are "nonpar" (default) and "semipar".}
 }
 \value{
-An object of class \code{TGST}.The class contains 6 slots: phi (percentage of gold standard tests), Z (true failure status), S (risk score), Rules (all possible tripartite rules), Nonparametric (logical indicator of the approach), and FNR.FPR (miclassification rates).
+An object of class \code{TGST}.The class contains 6 slots: phi (percentage of gold standard tests), Z (true failure status), S (risk score), Rules (all possible tripartite rules), Nonparametric (logical indicator of the approach), and FNR.FPR (misclassification rates).
 }
 \description{
 Create a TGST object, usually used as an input for optimal rule search and ROC analysis.

@@ -16,7 +16,7 @@ A simulated dataset containing true disease status and risk score. See details f
   }
 }
 \details{
-We first simulate viral status \eqn{Z} assuming \eqn{Z\sim Bernoulli(p)} with \eqn{p=0.25}; and then conditonal on \eqn{Z}, simulate \eqn{{S|Z=z}=ceiling(W)} with \eqn{W\sim Gamma(\eta_z,\kappa_z)} where \eqn{\eta} and \eqn{\kappa} are shape and scale parameters.\eqn{(\eta0,\kappa0)=(2.3,80)} and \eqn{(\eta1,\kappa1)=(9.2,62)}. 
+We first simulate viral status \eqn{Z} assuming \eqn{Z\sim Bernoulli(p)} with \eqn{p=0.25}; and then conditional on \eqn{Z}, simulate \eqn{{S|Z=z}=ceiling(W)} with \eqn{W\sim Gamma(\eta_z,\kappa_z)} where \eqn{\eta} and \eqn{\kappa} are shape and scale parameters.\eqn{(\eta0,\kappa0)=(2.3,80)} and \eqn{(\eta1,\kappa1)=(9.2,62)}. 
 }
 \examples{
 data(Simdata)

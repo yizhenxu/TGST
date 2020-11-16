@@ -59,7 +59,7 @@ vignette: >
 
 ####Value
 
-> An object of class TGST.The class contains 6 slots: phi (percentage of gold standard tests), Z (true failure status), S (risk score), Rules (all possible tripartite rules), Nonparametric (logical indicator of the approach), and FNR.FPR (miclassification rates).
+> An object of class TGST.The class contains 6 slots: phi (percentage of gold standard tests), Z (true failure status), S (risk score), Rules (all possible tripartite rules), Nonparametric (logical indicator of the approach), and FNR.FPR (misclassification rates).
  
 ####Author(s)
 
@@ -445,7 +445,7 @@ _____
  
 ####Details
 
-> We first simulate true failure status $Z$ assuming $Z\sim Bernoulli(p)$ with $p=0.25$; and then conditonal on $Z$, simulate ${S|Z=z}=ceiling(W)$ with $W\sim Gamma(\eta_z,\kappa_z)$ where $\eta$ and $\kappa$ are shape and scale parameters.$(\eta_0,\kappa_0)=(2.3,80)$ and $(\eta_1,\kappa_1)=(9.2,62)$.
+> We first simulate true failure status $Z$ assuming $Z\sim Bernoulli(p)$ with $p=0.25$; and then conditional on $Z$, simulate ${S|Z=z}=ceiling(W)$ with $W\sim Gamma(\eta_z,\kappa_z)$ where $\eta$ and $\kappa$ are shape and scale parameters.$(\eta_0,\kappa_0)=(2.3,80)$ and $(\eta_1,\kappa_1)=(9.2,62)$.
  
 ####Author(s)
 
