@@ -2,7 +2,7 @@ Package: TGST
 Title: Targeted Gold Standard Testing
 Version: 1.0
 Authors@R: c(
-    person("Yizhen", "Xu", role = c("aut", "cre"), email = "yizhen_xu@brown.edu"),
+    person("Yizhen", "Xu", role = c("aut", "cre"), email = "yizhen_xu@alumni.brown.edu"),
     person("Tao", "Liu", role = "aut", email = "tliu@stat.brown.edu ")
     )
 Description: Targeted viral load testing. Paper "Optimal Allocation of Gold Standard Testing under Constrained Availability: Application to Assessment of HIV Treatment Failure" (Liu, Hogan, Wang, Zhang, Kantor 2014).
