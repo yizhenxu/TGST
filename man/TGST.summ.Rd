@@ -25,12 +25,4 @@ Z = d$Z # True Disease Status
 S = d$S # Risk Score
 TGST.summ(Z,S)
 }
-\keyword{(treatment}
-\keyword{Prevalence}
-\keyword{disease}
-\keyword{distribution.}
-\keyword{failure),}
-\keyword{of}
-\keyword{risk}
-\keyword{score}
-\keyword{summary,}
+\keyword{summary}

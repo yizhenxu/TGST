@@ -7,7 +7,7 @@
 #' Percentage of treatment failure; 
 #' Summary statistics (mean, standard deviation, minimum, median, maximum and IQR) of risk score by true disease status; 
 #' Distribution plot.
-#' @keywords Prevalence of disease (treatment failure), risk score summary, risk score distribution.
+#' @keywords summary
 #' @import graphics
 #' @export
 #' @examples

@@ -5,7 +5,7 @@ Authors@R: c(
     person("Yizhen", "Xu", role = c("aut", "cre"), email = "yizhen_xu@alumni.brown.edu"),
     person("Tao", "Liu", role = "aut", email = "tliu@stat.brown.edu ")
     )
-Description: Targeted viral load testing. Paper "Optimal Allocation of Gold Standard Testing under Constrained Availability: Application to Assessment of HIV Treatment Failure" (Liu, Hogan, Wang, Zhang, Kantor 2014).
+Description: Targeted viral load testing. Paper "Optimal Allocation of Gold Standard Testing under Constrained Availability: Application to Assessment of HIV Treatment Failure" (Liu et al. 2014).
 Depends: R (>= 3.2.0)
 License: GPL
 LazyData: true
