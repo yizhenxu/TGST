@@ -29,8 +29,5 @@ phi = 0.1 #10\% of patients taking viral load test
 rules = nonpar.rules( Z, S, phi)
 nonpar.fnr.fpr(Z,S,rules[1,1],rules[1,2])
 }
-\keyword{FNR,}
-\keyword{FPR.}
-\keyword{Nonparametric,}
-\keyword{rules,}
-\keyword{tripartite}
+\keyword{nonparametric}
+\keyword{rules}

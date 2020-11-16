@@ -56,7 +56,7 @@ TGST.summ = function(Z,S){
 #' @param lambda A user-specified weight that reflects relative loss for the two types of misdiagnoses, taking value in \eqn{[0,1]}. \eqn{Loss=\lambda*I(FN)+(1-\lambda)*I(FP)}.
 #' @return 
 #' Optimal nonparametric rule and its associated misclassification rates (FNR, FPR), optimal lambda risk, and total misclassification rate (TMR). 
-#' @keywords Nonparametric, optimal tripartite rules, optimal risk.
+#' @keywords nonparametric rules
 #' @export
 #' @examples
 #' d = Simdata
@@ -96,7 +96,7 @@ Opt.nonpar.rule <- function(Z,S,phi,lambda){
 #' @param lambda A user-specified weight that reflects relative loss for the two types of misdiagnoses, taking value in \eqn{[0,1]}. \eqn{Loss=\lambda*I(FN)+(1-\lambda)*I(FP)}.
 #' @return 
 #' Optimal semiparametric rule and its associated misclassification rates (FNR, FPR), optimal lambda risk, and total misclassification rate (TMR). 
-#' @keywords Semiparametric, optimal tripartite rules, optimal risk.
+#' @keywords semiparametric rules
 #' @export
 #' @examples
 #' d = Simdata
@@ -136,7 +136,7 @@ Opt.semipar.rule <- function(Z,S,phi,lambda){
 #' AUC The area under the ROC curve.
 #' FNR Misdiagnoses rate for viral failure (false negative rate).
 #' FPR Misdiagnoses rate for treatment failure (false positive rate).
-#' @keywords Nonparametric, ROC, AUC, FNR, FPR.
+#' @keywords nonparametric AUC
 #' @import graphics
 #' @export
 #' @examples
@@ -183,7 +183,7 @@ ROC.nonpar <- function(Z,S,phi,plot=TRUE){
 #' AUC The area under the ROC curve.
 #' FNR Misdiagnoses rate for viral failure (false negative rate).
 #' FPR Misdiagnoses rate for treatment failure (false positive rate).
-#' @keywords Nonparametric, ROC, AUC, FNR, FPR.
+#' @keywords semiparametric AUC
 #' @import graphics
 #' @export
 #' @examples

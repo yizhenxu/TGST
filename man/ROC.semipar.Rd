@@ -33,8 +33,5 @@ a$AUC
 a$FNR
 a$FPR
 }
-\keyword{AUC,}
-\keyword{FNR,}
-\keyword{FPR.}
-\keyword{Nonparametric,}
-\keyword{ROC,}
+\keyword{AUC}
+\keyword{semiparametric}

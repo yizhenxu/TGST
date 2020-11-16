@@ -29,9 +29,5 @@ Obj = TGST(Z, S, phi, method="nonpar")
 lambda = 0.8
 CV.TGST(Obj, lambda, K=10)
 }
-\keyword{Cross}
-\keyword{FNR,}
-\keyword{FPR.}
-\keyword{optimal}
-\keyword{risk,}
-\keyword{validation,}
+\keyword{risk}
+\keyword{validation}

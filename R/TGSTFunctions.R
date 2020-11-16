@@ -10,7 +10,7 @@
 #' @param phi Percentage of patients taking viral load test. 
 #' @return 
 #' Matrix with 2 columns. Each row is a possible tripartite rule, with output on lower and upper cutoff.
-#' @keywords Nonparametric, tripartite rules, FNR, FPR.
+#' @keywords nonparametric rules
 #' @export
 #' @examples
 #' d = Simdata
@@ -96,7 +96,7 @@ nonpar.rules <- function(Z,S,phi){
 #' @param u Upper cutoff of tripartite rule. 
 #' @return 
 #' Matrix with 2 columns. Each row is a set of nonparametric (FNR, FPR) on an associated tripartite rule.
-#' @keywords Nonparametric, tripartite rules, FNR, FPR.
+#' @keywords nonparametric rules
 #' @export
 #' @examples
 #' d = Simdata
@@ -131,7 +131,7 @@ nonpar.fnr.fpr <- function(Z,S,l,u){
 #' @param u Upper cutoff of tripartite rule. 
 #' @return 
 #' Matrix with 2 columns. Each row is a set of semiparametric (FNR, FPR) on an associated tripartite rule.
-#' @keywords Semiparametric, tripartite rules, FNR, FPR.
+#' @keywords semiparametric rules
 #' @export
 #' @examples
 #' d = Simdata
@@ -194,7 +194,7 @@ semipar.fnr.fpr <- function(Z,S,l,u){
 #' @param u Upper cutoff of all possible tripartite rules. 
 #' @return 
 #' AUC.
-#' @keywords ROC analysis, AUC.
+#' @keywords AUC
 #' @export
 #' @examples
 #' d = Simdata

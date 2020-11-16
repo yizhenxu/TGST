@@ -24,7 +24,4 @@ Z = d$Z # True Disease Status
 S = d$S # Risk Score
 Check.exp.tilt( Z, S)
 }
-\keyword{Semiparametric,}
-\keyword{exponential}
-\keyword{model.}
-\keyword{tilt}
+\keyword{semiparametric}

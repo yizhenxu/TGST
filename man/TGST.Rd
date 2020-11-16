@@ -29,7 +29,4 @@ phi = 0.1 #10\% of patients taking viral load test
 TGST( Z, S, phi, method="nonpar")
 
 }
-\keyword{FNR,}
-\keyword{FPR.}
-\keyword{Tripartite}
-\keyword{rules,}
+\keyword{rules}

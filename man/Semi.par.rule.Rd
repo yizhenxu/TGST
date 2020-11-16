@@ -26,8 +26,5 @@ S = d$S # Risk Score
 phi = 0.1 #10\% of patients taking viral load test
 Semi.par.rule( Z, S, phi)
 }
-\keyword{Semiparametric,}
-\keyword{optimal}
-\keyword{risk.}
-\keyword{rules,}
-\keyword{tripartite}
+\keyword{rules}
+\keyword{semiparametric}

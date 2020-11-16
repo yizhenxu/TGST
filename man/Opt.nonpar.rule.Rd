@@ -29,8 +29,5 @@ phi = 0.1 #10\% of patients taking viral load test
 lambda = 0.5
 Opt.nonpar.rule( Z, S, phi, lambda)
 }
-\keyword{Nonparametric,}
-\keyword{optimal}
-\keyword{risk.}
-\keyword{rules,}
-\keyword{tripartite}
+\keyword{nonparametric}
+\keyword{rules}

@@ -5,7 +5,7 @@
 #' @param plot Logical parameter indicating if ROC curve should be plotted. Default is \code{plot=TRUE}. If false, then only AUC is calculated.
 #' @return 
 #' AUC (the area under ROC curve) and ROC curve.
-#' @keywords ROC, AUC.
+#' @keywords ROC  
 #' @export
 #' @examples
 #' d = Simdata

@@ -27,8 +27,5 @@ S = d$S # Risk Score
 phi = 0.1 #10\% of patients taking viral load test
 nonpar.rules( Z, S, phi)
 }
-\keyword{FNR,}
-\keyword{FPR.}
-\keyword{Nonparametric,}
-\keyword{rules,}
-\keyword{tripartite}
+\keyword{nonparametric}
+\keyword{rules}

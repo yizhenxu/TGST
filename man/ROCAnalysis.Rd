@@ -26,5 +26,4 @@ lambda = 0.5
 Obj = TGST(Z, S, phi, method="nonpar")
 ROCAnalysis(Obj, plot=TRUE)
 }
-\keyword{AUC.}
-\keyword{ROC,}
+\keyword{ROC}

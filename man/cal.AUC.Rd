@@ -29,6 +29,4 @@ phi = 0.1 #10\% of patients taking viral load test
 rules = nonpar.rules( Z, S, phi)
 cal.AUC(Z,S,rules[,1],rules[,2])
 }
-\keyword{AUC.}
-\keyword{ROC}
-\keyword{analysis,}
+\keyword{AUC}

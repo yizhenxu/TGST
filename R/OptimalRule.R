@@ -6,7 +6,7 @@
 #' @param lambda A user-specified weight that reflects relative loss for the two types of misdiagnoses, taking value in \eqn{[0,1]}. \eqn{Loss=\lambda*I(FN)+(1-\lambda)*I(FP)}.
 #' @return 
 #' Optimal tripartite rule. 
-#' @keywords Optimal tripartite rules, optimal lambda risk.
+#' @keywords rules
 #' @import methods
 #' @export
 #' @examples

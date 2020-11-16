@@ -27,9 +27,4 @@ lambda = 0.5
 Obj = TGST(Z, S, phi, method="nonpar")
 OptimalRule(Obj, lambda)
 }
-\keyword{Optimal}
-\keyword{lambda}
-\keyword{optimal}
-\keyword{risk.}
-\keyword{rules,}
-\keyword{tripartite}
+\keyword{rules}

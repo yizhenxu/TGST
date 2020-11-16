@@ -6,7 +6,7 @@
 #' @param S Risk score. 
 #' @return 
 #' Plot of empirical density for risk score S, joint empirical density for (S,Z=1) and (S,Z=0), and the density under the exponential tilt model assumption for (S,Z=1) and (S,Z=0).
-#' @keywords Semiparametric, exponential tilt model.
+#' @keywords semiparametric
 #' @import ggplot2 stats graphics
 #' @export
 #' @examples

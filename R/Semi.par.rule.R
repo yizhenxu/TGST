@@ -6,7 +6,7 @@
 #' @param phi Percentage of patients taking viral load test. 
 #' @return 
 #' Semiparametric rule and its associated TMR.
-#' @keywords Semiparametric, optimal tripartite rules, optimal risk.
+#' @keywords semiparametric rules
 #' @export
 #' @examples
 #' d = Simdata
