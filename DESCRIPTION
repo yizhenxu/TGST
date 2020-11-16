@@ -5,7 +5,7 @@ Authors@R: c(
     person("Yizhen", "Xu", role = c("aut", "cre"), email = "yizhen_xu@alumni.brown.edu"),
     person("Tao", "Liu", role = "aut", email = "tliu@stat.brown.edu ")
     )
-Description: Targeted viral load testing. Paper "Optimal Allocation of Gold Standard Testing under Constrained Availability: Application to Assessment of HIV Treatment Failure" (Liu et al. 2014).
+Description: A package for implementing targeted gold standard (GS) testing. You provide the true disease or treatment failure status and the risk score, tell 'TGST' the availability of GS tests and which method to use, and it returns the optimal tripartite rules. Please refer to "Optimal Allocation of Gold Standard Testing under Constrained Availability: Application to Assessment of HIV Treatment Failure" (2014) for more details.
 Depends: R (>= 3.2.0)
 License: GPL
 LazyData: true
