@@ -21,16 +21,16 @@
 
 nonpar.rules <- function(Z,S,phi){
   if(length(Z)!=length(S))
-    cat("***** Warning: Disease status and risk score vector lengths do not match. \n")
+    message("***** Warning: Disease status and risk score vector lengths do not match. \n")
   data <- cbind(Z,S)
   Z <- data[complete.cases(data),1]
   S <- data[complete.cases(data),2]
   
   Z <- 1*Z #make logical values into {0,1}
   if(phi>1 || phi<0)
-    cat("***** Warning: Invalid phi. \n")
+    message("***** Warning: Invalid phi. \n")
   if(cor(Z,S)<0)
-    cat("***** Warning: Disease status is negatively associated with risk score.
+    message("***** Warning: Disease status is negatively associated with risk score.
         Suggest using (-) value for risk score. \n")
   
   # "total.sam.sz" stands for total sample size
@@ -77,7 +77,7 @@ nonpar.rules <- function(Z,S,phi){
   }
   if(phi==0){
     bounds <- cbind(1:n.unique.S, 1:n.unique.S)
-    cat("***** Warning: 0 patient taking viral load test. \n")
+    message("***** Warning: 0 patient taking viral load test. \n")
   }
   l <- S.srt[bounds[,1]]
   u <- S.srt[bounds[,2]]
@@ -108,7 +108,7 @@ nonpar.rules <- function(Z,S,phi){
 
 nonpar.fnr.fpr <- function(Z,S,l,u){
   if(length(l)!=length(u))   #l is lower cutoff, u is upper cutoff
-    cat("***** Warning: Wrong rules set. \n")
+    message("***** Warning: Wrong rules set. \n")
   #l is lower cutoff, u is upper cutoff
   n.bounds <-  length(l) #number of all possible rules
   mean.Z <- mean(Z,na.rm=TRUE)
@@ -143,7 +143,7 @@ nonpar.fnr.fpr <- function(Z,S,l,u){
 
 semipar.fnr.fpr <- function(Z,S,l,u){
   if(length(l)!=length(u))   #l is lower cutoff, u is upper cutoff
-    cat("***** Warning: Wrong rules set. \n")
+    message("***** Warning: Wrong rules set. \n")
   p <- mean(Z)
   temp <- density(S) #marginal density (S)
   fit <- glm(Z~ S, family=binomial)
