@@ -2,12 +2,12 @@ Package: TGST
 Title: Targeted Gold Standard Testing
 Version: 1.0
 Authors@R: c(
-    person("Yizhen", "Xu", role = c("aut", "cre"), email = "yizhen_xu@alumni.brown.edu"),
-    person("Tao", "Liu", role = "aut", email = "tliu@stat.brown.edu ")
+    person("Yizhen", "Xu", email = "yizhen_xu@alumni.brown.edu", role = c("aut", "cre")),
+    person("Tao", "Liu", email = "tliu@stat.brown.edu", role = "aut")
     )
-Description: Functions for implementing the targeted gold standard (GS) testing. You provide the true disease or treatment failure status and the risk score, tell 'TGST' the availability of GS tests and which method to use, and it returns the optimal tripartite rules. Please refer to "Optimal Allocation of Gold Standard Testing under Constrained Availability: Application to Assessment of HIV Treatment Failure" (2014) for more details.
+Description: Functions for implementing the targeted gold standard (GS) testing. You provide the true disease or treatment failure status and the risk score, tell 'TGST' the availability of GS tests and which method to use, and it returns the optimal tripartite rules. Please refer to Liu et al. (2013) <doi:10.1080/01621459.2013.810149> for more details.
 Depends: R (>= 3.2.0)
-License: GPL
+License: GPL-3
 LazyData: true
 Suggests: rmarkdown
 VignetteBuilder: knitr

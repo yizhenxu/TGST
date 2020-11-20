@@ -7,7 +7,7 @@
 #' @return 
 #' Optimal tripartite rule. 
 #' @keywords rules
-#' @import methods
+#' @import methods utils
 #' @export
 #' @examples
 #' d = Simdata
@@ -38,7 +38,8 @@ OptimalRule <- function(Obj,lambda){
   opt.rule <- Obj@Rules[index,]
   names(opt.rule) <- c("lower.cutoff","upper.cutoff")
   result=new("Output", phi=Obj@phi, Z=Obj@Z, S=Obj@S, Rules=Obj@Rules, Nonparametric=Obj@Nonparametric, FNR.FPR=Obj@FNR.FPR, OptRule=opt.rule)
-  print(opt.rule)
+  #print(opt.rule)
+  message(paste0(utils::capture.output(opt.rule), collapse = "\n"))
   return(invisible(result))
   
 }
